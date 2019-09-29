@@ -1,0 +1,23 @@
+//
+//  PrefixHeader.pch
+//  yuYue
+//
+//  Created by edz on 2019/8/5.
+//  Copyright © 2019 edz. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+#import "CommonDefine.h"
+#define MAS_SHORTHAND
+#define MAS_SHORTHAND_GLOBALS
+#import<Masonry.h>
+#import <AFNetworking.h>
+#import<YYModel.h>
+#import<MJRefresh.h>
+#import <IQKeyboardManager.h> 
+#import <UIImageView+WebCache.h>
+#import <ZFPlayer.h>
+#import "SVProgressHUD.h"
+
+#endif 

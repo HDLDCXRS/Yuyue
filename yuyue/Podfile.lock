@@ -1,0 +1,87 @@
+PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
+  - AlipaySDK-iOS (15.5.9)
+  - IQKeyboardManager (6.4.0)
+  - JCore (2.1.1)
+  - JPush (3.2.2):
+    - JCore (< 3.0.0, >= 2.0.0)
+  - KSYMediaPlayer (3.0.4)
+  - Masonry (1.1.0)
+  - MJRefresh (3.2.0)
+  - SDWebImage (4.4.7):
+    - SDWebImage/Core (= 4.4.7)
+  - SDWebImage/Core (4.4.7)
+  - SVProgressHUD (2.2.5)
+  - YYModel (1.0.4)
+  - ZFPlayer (3.2.13):
+    - ZFPlayer/Core (= 3.2.13)
+  - ZFPlayer/AVPlayer (3.2.13):
+    - ZFPlayer/Core
+  - ZFPlayer/ControlView (3.2.13):
+    - ZFPlayer/Core
+  - ZFPlayer/Core (3.2.13)
+  - ZFPlayer/KSYMediaPlayer (3.2.13):
+    - KSYMediaPlayer
+    - ZFPlayer/Core
+
+DEPENDENCIES:
+  - AFNetworking (~> 3.0)
+  - AlipaySDK-iOS
+  - IQKeyboardManager
+  - JPush
+  - Masonry
+  - MJRefresh
+  - SDWebImage (~> 4.0)
+  - SVProgressHUD
+  - YYModel
+  - ZFPlayer
+  - ZFPlayer/AVPlayer (~> 3.0)
+  - ZFPlayer/ControlView (~> 3.0)
+  - ZFPlayer/KSYMediaPlayer
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
+    - AlipaySDK-iOS
+    - IQKeyboardManager
+    - JCore
+    - JPush
+    - KSYMediaPlayer
+    - Masonry
+    - MJRefresh
+    - SDWebImage
+    - SVProgressHUD
+    - YYModel
+    - ZFPlayer
+
+SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  AlipaySDK-iOS: 1c5283b30977a24acecc0114662697f7dc78f618
+  IQKeyboardManager: fcef267266379c003181fc3592f6bdb8bf4db839
+  JCore: 4072327557f0b83cc22dd4041f2f839740c0077b
+  JPush: 0e9088c85c73275629facc311fe5992dfac36eeb
+  KSYMediaPlayer: 795fad3638981904805bec260898f805fb36c1c5
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
+  SDWebImage: c10d14a8883ebd89664f02a422006f66a85c0c5d
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
+  ZFPlayer: b2ba40c924e1b9a7f0a670632c4235ffbe6ee055
+
+PODFILE CHECKSUM: c1ac293a4221072d8801b3246295612624bffe4c
+
+COCOAPODS: 1.7.5
