@@ -149,15 +149,22 @@
 -(void)postPhotoMethod
 {
     typeof(self) weakSelf = self;
+    //把图片转成data
     NSData *imageData = UIImageJPEGRepresentation(self.feedObject.photoBtn.currentBackgroundImage, 0.7);
-    NSDictionary *dic = @{
-                          @"file":imageData
-                          };
-    [self.manager POST:@"uploadFile/uploadServer" parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+//    NSDictionary *dic = @{
+//                          @"file":imageData
+//                          };
+    //上传data
+    [self.manager POST:@"uploadFile/uploadServer" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        //创建一个格式化日期对象
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        //日期的格式
         formatter.dateFormat   = @"YYYY-MM-dd-hh:mm:ss:SSS";
+        //将日期转变成字符串
         NSString *str = [formatter stringFromDate:[NSDate date]];
+        //设置图片的名字
         NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+        //  FileData 是图片的数据流    fileName是文件名   name 是后台给的图片参数   mimeType 是文件类型
         [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/png"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         NSLog(@"++++++guocheng");

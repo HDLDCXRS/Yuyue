@@ -43,7 +43,9 @@
     _titleArry = @[@"请输入标题",@"请输入原创姓名",@"作品分类"];
     _aTableView.tableFooterView = [UIView new];
     self.aTableView.scrollEnabled =NO;
-   // [_aTableView reloadData];
+    _publisView.onClickBtn = ^(UIButton * _Nonnull btn) {
+        
+    };
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
