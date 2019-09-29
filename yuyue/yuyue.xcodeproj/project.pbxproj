@@ -126,7 +126,6 @@
 		009A31EE230F9B1700515B4B /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A31A0230F9B1600515B4B /* ForgetPasswordViewController.m */; };
 		009A31EF230F9B1700515B4B /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A31A4230F9B1600515B4B /* BaseView.m */; };
 		009A31F0230F9B1700515B4B /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A31A6230F9B1600515B4B /* BaseViewController.m */; };
-		009A31F1230F9B1700515B4B /* CustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A31A7230F9B1600515B4B /* CustomerModel.m */; };
 		009A31F2230F9B1700515B4B /* BassInformationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A31A9230F9B1700515B4B /* BassInformationTableViewCell.m */; };
 		009A31F3230F9B1700515B4B /* MainLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A31AB230F9B1700515B4B /* MainLoginViewController.m */; };
 		009A31F4230F9B1700515B4B /* MineMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A31AD230F9B1700515B4B /* MineMoneyViewController.m */; };
@@ -384,9 +383,7 @@
 		009A31A0230F9B1600515B4B /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
 		009A31A3230F9B1600515B4B /* BassInformationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BassInformationTableViewCell.h; sourceTree = "<group>"; };
 		009A31A4230F9B1600515B4B /* BaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseView.m; sourceTree = "<group>"; };
-		009A31A5230F9B1600515B4B /* CustomerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerModel.h; sourceTree = "<group>"; };
 		009A31A6230F9B1600515B4B /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		009A31A7230F9B1600515B4B /* CustomerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerModel.m; sourceTree = "<group>"; };
 		009A31A8230F9B1700515B4B /* BaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseView.h; sourceTree = "<group>"; };
 		009A31A9230F9B1700515B4B /* BassInformationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BassInformationTableViewCell.m; sourceTree = "<group>"; };
 		009A31AA230F9B1700515B4B /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -1045,8 +1042,6 @@
 				009A31A9230F9B1700515B4B /* BassInformationTableViewCell.m */,
 				009A31A8230F9B1700515B4B /* BaseView.h */,
 				009A31A4230F9B1600515B4B /* BaseView.m */,
-				009A31A5230F9B1600515B4B /* CustomerModel.h */,
-				009A31A7230F9B1600515B4B /* CustomerModel.m */,
 				009A31AA230F9B1700515B4B /* BaseViewController.h */,
 				009A31A6230F9B1600515B4B /* BaseViewController.m */,
 				0028B640233F58F80067E1EF /* BaseCommonTableViewCell.h */,
@@ -1501,7 +1496,6 @@
 				0024386B232CAA7B00827E31 /* DiverSceneViewController.m in Sources */,
 				009A3202230F9B1700515B4B /* PerformanceTableViewController.m in Sources */,
 				009A31F9230F9B1700515B4B /* MinePublishViewController.m in Sources */,
-				009A31F1230F9B1700515B4B /* CustomerModel.m in Sources */,
 				009A31F8230F9B1700515B4B /* MinePublicTableViewCell.m in Sources */,
 				006AF1B12339E677004DDBC5 /* NoDataView.m in Sources */,
 			);

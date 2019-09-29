@@ -9,30 +9,21 @@
 #import "SexPickerTool.h"
 
 @interface SexPickerTool ()<UIPickerViewDelegate,UIPickerViewDataSource>
-
-@property (nonatomic,strong)NSMutableArray *dataSource;
-
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
-
+@property(nonatomic,strong) NSArray  *dataSource;
 @property (nonatomic,copy)NSString *sexPick;
 
 
 @end
 
 @implementation SexPickerTool
-
-- (NSMutableArray *)dataSource
-{
-    if (_dataSource == nil) {
-        _dataSource = [NSMutableArray arrayWithObjects:@"男",@"女", nil];
-    }
-    return _dataSource;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame DataSorce:(NSArray *)data
 {
     if (self = [super initWithFrame:frame]) {
+        
         self = [[[NSBundle mainBundle] loadNibNamed:@"SexPickerTool" owner:nil options:nil]firstObject];
+        _dataSource = data;
+        self.sexPick = self.dataSource[0];
     }
     self.frame = frame;
     return self;
@@ -44,7 +35,6 @@
     
     self.pickerView.showsSelectionIndicator = YES;
     
-    self.sexPick = self.dataSource[0];
 }
 
 - (IBAction)pickDone:(UIButton *)sender {
@@ -53,7 +43,7 @@
 
 
 - (IBAction)pickCancel:(UIButton *)sender {
-    self.callBlock(self.dataSource[0]);
+    self.callBlock(nil);
 }
 
 

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CustomerModel.h"
+//#import "CustomerModel.h"
 NS_ASSUME_NONNULL_BEGIN
 //设置一个代理，用于将textField中d输入的值传递到Ccontroller中去处理
 //@protocol CustomerCellDelegate <NSObject>

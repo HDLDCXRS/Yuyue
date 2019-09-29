@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+typedef void(^BtnBlock)(UIButton *btn);
 @interface BaseView : UIView
 @property(nonatomic,strong) UIImageView  * headImageView;
 @property(nonatomic,strong) UIButton  * photoBtn;
+@property(nonatomic,copy) BtnBlock   click;
 @end
 
 NS_ASSUME_NONNULL_END

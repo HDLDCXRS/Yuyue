@@ -13,5 +13,5 @@ typedef void(^SexPickBlock)(NSString *pickDate);
 @interface SexPickerTool : UIView
 
 @property (nonatomic,strong)SexPickBlock callBlock;
-
+- (instancetype)initWithFrame:(CGRect)frame DataSorce:(NSArray *)data;
 @end

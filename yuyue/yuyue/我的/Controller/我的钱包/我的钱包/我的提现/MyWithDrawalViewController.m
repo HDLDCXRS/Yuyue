@@ -63,6 +63,8 @@
     NSString *openID = [[NSUserDefaults standardUserDefaults]valueForKey:@"opendId"];
     [_dic setValue:openID forKey:@"opendId" ];
     [_dic setValue:@"TXWX" forKey:@"tradeType"];
+    [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+    [SVProgressHUD setMaximumDismissTimeInterval:2.0];
     [self.manager POST:@"pay/outMoney" parameters:_dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"status"] boolValue] == true) {
             [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
