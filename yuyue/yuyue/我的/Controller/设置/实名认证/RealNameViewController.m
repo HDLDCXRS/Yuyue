@@ -10,14 +10,30 @@
 #import "RealNameView.h"
 #import "CheckCode.h"
 #import "PassRealNameViewController.h"
+#import "PostPhotoModel.h"
 @interface RealNameViewController ()<UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property(nonatomic,strong) UIScrollView *scrollView;
 @property(nonatomic,strong) RealNameView  *realView;
 @property(nonatomic,strong) UIButton  *finishBtn;
 @property(nonatomic,assign) NSInteger  count;
+@property(nonatomic,strong) NSMutableDictionary  *dic;
+@property(nonatomic,strong) AFHTTPSessionManager  *manager;
+@property(nonatomic,strong) NSString  *url;
 @end
 
 @implementation RealNameViewController
+-(AFHTTPSessionManager*)manager
+{
+    if (!_manager) {
+        _manager = [[AFHTTPSessionManager alloc] initWithBaseURL:WEBURLA];
+        _manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/javascript",@"text/html",@"text/plain",nil];
+        _manager.requestSerializer=[AFHTTPRequestSerializer serializer];
+        //
+        [_manager.requestSerializer setValue: [NSString stringWithFormat:@"%@", TOKEN] forHTTPHeaderField:@"token"];
+    }
+    return _manager;
+}
 - (UIButton *)finishBtn
 {
     if (!_finishBtn) {
@@ -76,7 +92,7 @@
             case 2:
                  weakSelf.count = 2;
                  [weakSelf showActionSheet];
-                 //[weakSelf.realView.postReversePhotoBtn setImage:weakSelf.image forState:UIControlStateNormal];
+                
                 break;
             case 3:
                  weakSelf.count = 3;
@@ -95,8 +111,15 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == self.realView.idTextField) {
-        [CheckCode judgeIdentityStringValid:textField.text postUIViewController:self];
+        if ([CheckCode judgeIdentityStringValid:textField.text postUIViewController:self ]) {
+            [_dic setValue:textField.text forKey:@"idCard"];
+        }
     }
+    else
+    {
+        [_dic setValue:textField.text forKey:@"realName"];
+    }
+        
 
 }
 -(void)showActionSheet
@@ -146,7 +169,7 @@
 //    _image = image;
     if (self.count == 1) {
         [self.realView.postRightPhotoBtn setImage:image forState:UIControlStateNormal];
-        //[picker dismissViewControllerAnimated:YES completion:nil];
+        //self
     }
     else if(self.count == 2)
     {
@@ -162,5 +185,104 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
     [picker dismissViewControllerAnimated:YES completion:nil];
     
+}
+-(void)postPhotoMethod1
+{
+    typeof(self) weakSelf = self;
+    //把图片转成data
+    NSData *imageData = UIImageJPEGRepresentation(self.realView.postRightPhotoBtn.currentBackgroundImage, 0.7);
+    //上传data
+    [self.manager POST:@"uploadFile/uploadServer" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        //创建一个格式化日期对象
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        //日期的格式
+        formatter.dateFormat   = @"YYYY-MM-dd-hh:mm:ss:SSS";
+        //将日期转变成字符串
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        //设置图片的名字
+        NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+        //  FileData 是图片的数据流    fileName是文件名   name 是后台给的图片参数   mimeType 是文件类型
+        [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/png"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        NSLog(@"++++++guocheng");
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if ([responseObject[@"status"] boolValue] == true) {
+            PostPhotoModel *model = [PostPhotoModel yy_modelWithJSON:responseObject[@"result"][@"uploadFile"][0]];
+            weakSelf.url = model.filesPath;
+            NSLog(@"%@",responseObject);
+        }
+        else
+        {
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"failure");
+    }];
+}
+-(void)postPhotoMethod2
+{
+    typeof(self) weakSelf = self;
+    //把图片转成data
+    NSData *imageData = UIImageJPEGRepresentation(self.realView.postReversePhotoBtn.currentBackgroundImage, 0.7);
+    //上传data
+    [self.manager POST:@"uploadFile/uploadServer" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        //创建一个格式化日期对象
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        //日期的格式
+        formatter.dateFormat   = @"YYYY-MM-dd-hh:mm:ss:SSS";
+        //将日期转变成字符串
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        //设置图片的名字
+        NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+        //  FileData 是图片的数据流    fileName是文件名   name 是后台给的图片参数   mimeType 是文件类型
+        [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/png"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        NSLog(@"++++++guocheng");
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if ([responseObject[@"status"] boolValue] == true) {
+            PostPhotoModel *model = [PostPhotoModel yy_modelWithJSON:responseObject[@"result"][@"uploadFile"][0]];
+            weakSelf.url = model.filesPath;
+            NSLog(@"%@",responseObject);
+        }
+        else
+        {
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"failure");
+    }];
+}
+-(void)postPhotoMethod3
+{
+    typeof(self) weakSelf = self;
+    //把图片转成data
+    NSData *imageData = UIImageJPEGRepresentation(self.realView.postReversePhotoBtn.currentBackgroundImage, 0.7);
+    //上传data
+    [self.manager POST:@"uploadFile/uploadServer" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        //创建一个格式化日期对象
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        //日期的格式
+        formatter.dateFormat   = @"YYYY-MM-dd-hh:mm:ss:SSS";
+        //将日期转变成字符串
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        //设置图片的名字
+        NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+        //  FileData 是图片的数据流    fileName是文件名   name 是后台给的图片参数   mimeType 是文件类型
+        [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/png"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        NSLog(@"++++++guocheng");
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if ([responseObject[@"status"] boolValue] == true) {
+            PostPhotoModel *model = [PostPhotoModel yy_modelWithJSON:responseObject[@"result"][@"uploadFile"][0]];
+            weakSelf.url = model.filesPath;
+            NSLog(@"%@",responseObject);
+        }
+        else
+        {
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"failure");
+    }];
 }
 @end

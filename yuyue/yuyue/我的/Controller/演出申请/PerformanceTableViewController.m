@@ -161,19 +161,29 @@
     UIView *footer = nil;
     if (section == 1) {
         footer = [[UIView alloc]initWithFrame:CGRectMake(15,0, SCREENWIDTH,108)];
-        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectZero];
-        lab.textAlignment = NSTextAlignmentLeft;
-        lab.font = [UIFont fontWithName:@"PingFang-SC-Medium" size: 12];
-        lab.numberOfLines = 0;
-        lab.text = @"请确认填写信息真实，如有违法违规行为信息将作为有关部门证据hahh hauhfjahvfdjjfdcjvfdjvjdc dcdcdvc";
-        lab.textColor = RGBA(153, 153, 153, 1);
-        [footer addSubview:lab];
-        [lab makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(footer.centerY);
-            make.right.equalTo(0);
+        UIImageView *bgcImg = [[UIImageView alloc] init];
+        bgcImg.image = [UIImage imageNamed:@"问题 (1)"];
+        CGSize size = bgcImg.image.size;
+        [footer addSubview:bgcImg];
+        [bgcImg makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(5);
             make.left.equalTo(15);
-            make.height.equalTo(60);
+            make.size.equalTo(CGSizeMake(size.width, size.height));
         }];
+                UILabel *lab = [[UILabel alloc]initWithFrame:CGRectZero];
+                lab.textAlignment = NSTextAlignmentLeft;
+                lab.font = [UIFont fontWithName:@"PingFang-SC-Medium" size: 12];
+                lab.numberOfLines = 0;
+                lab.text = @"请确认填写信息真实，如有违法违规行为信息将作为有关部门证据";
+                lab.textColor = RGBA(153, 153, 153, 1);
+                [footer addSubview:lab];
+                [lab makeConstraints:^(MASConstraintMaker *make) {
+                    make.centerY.equalTo(footer.centerY);
+                    make.right.equalTo(-15);
+                    make.left.equalTo(15);
+                    make.height.equalTo(60);
+                }];
+
         footer.backgroundColor = RGBA(243, 243, 243, 1);
     }
     

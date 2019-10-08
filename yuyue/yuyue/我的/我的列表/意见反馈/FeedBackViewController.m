@@ -184,18 +184,9 @@
 }
 -(void)postSuggestUrlMethod
 {
-//    NSMutableDictionary *dic = @{
-//                          @"pictureUrl":_url,
-//                          @"details"  :_feedObject.contentTextView.text,
-//                          @"contact"  :_feedObject.textField.text
-//                          };
-    
-//    NSLog(@"%@",dic);
     [self.dic setValue:self.feedObject.contentTextView.text forKey:@"details"];
     [self.dic setValue:self.feedObject.textField.text forKey:@"contact"];
     [self.dic setValue:self.url forKey:@"pictureUrl"];
-   
-   
     NSLog(@"%@",_dic);
     typeof(self) weakSelf = self;
     [self.manager POST:@"myController/feedback" parameters:_dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

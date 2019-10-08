@@ -47,8 +47,11 @@
     _tableView.tableFooterView = [UIView new];
     _page = 1;
     [self LoadData];
+    
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(LoadData)];
+    [self.tableView.mj_header beginRefreshing];
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(LoadMoreData)];
+    [self.tableView.mj_footer beginRefreshing];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -69,11 +72,7 @@
 {
     return 221;
 }
-//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-//{
-//    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(LoadData)];
-//    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(LoadMoreData)];
-//}
+
 -(void)LoadData
 {
     self.page=1;
@@ -87,6 +86,7 @@
                 weakSelf.videoArr = (NSMutableArray *)[NSArray yy_modelArrayWithClass:[VideoModel class] json:responseObject[@"result"]];
                 //NSLog(@"%lu",(unsigned long)arr.count);
                 [weakSelf.tableView reloadData];
+                
                 [weakSelf.tableView.mj_header endRefreshing];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -107,20 +107,27 @@
         if ([responseObject[@"status"] boolValue] == true) {
             NSMutableArray *mustArr = (NSMutableArray *)[NSArray yy_modelArrayWithClass:[VideoModel class] json:responseObject[@"result"]];
             if (mustArr.count == 0) {
-                [weakSelf.tableView reloadData];
+                self.page =self.page -1;
                 [weakSelf.tableView.mj_footer endRefreshing];
+//                [weakSelf.tableView reloadData];
             }
             else
             {
-            [weakSelf.videoArr addObjectsFromArray:mustArr];
-           // weakSelf.videoArr = (NSMutableArray *)[NSArray yy_modelArrayWithClass:[VideoModel class] json:responseObject[@"result"]];
-            //NSLog(@"%lu",(unsigned long)arr.count);
-            [weakSelf.tableView reloadData];
-            //[weakSelf.tableView.mj_footer endRefreshing];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                   // [weakSelf.videoArr addObjectsFromArray:mustArr];
+                    [mustArr addObjectsFromArray:weakSelf.videoArr];
+                    [weakSelf.tableView reloadData];
+                    [weakSelf.tableView.mj_footer endRefreshing];
+                });
+           
             }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
     }];
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"++++++");
 }
 @end

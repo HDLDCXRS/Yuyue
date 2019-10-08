@@ -125,11 +125,7 @@
     {
         [_loginBtn setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"nickName"] forState:UIControlStateNormal];
         _loginBtn.userInteractionEnabled =NO;
-//        if (![[NSUserDefaults standardUserDefaults] valueForKey:@"headpUrl"]) {
-//            _icomImg.image = [UIImage imageNamed:@"头像"];
-//        }
-//        else
-//        {
+
         [_icomImg sd_setImageWithURL:[[NSUserDefaults standardUserDefaults] valueForKey:@"headpUrl"]];
       //  }
     }

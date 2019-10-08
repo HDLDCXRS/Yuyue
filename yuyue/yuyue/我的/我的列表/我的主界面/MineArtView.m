@@ -110,7 +110,7 @@
             make.bottom.equalTo(self.fansTitle.top).offset(-10);
             make.centerX.equalTo(self.earningBtn.centerX);
             make.height.equalTo(10);
-            make.width.equalTo(distance);
+            make.width.equalTo(distance+10);
         }];
     }
     return self;

@@ -558,14 +558,6 @@
 				0024EFCB2325DAFE001A6BC6 /* VideoTableViewCell.m */,
 				0024EFCA2325DAFE001A6BC6 /* ZFPlayerDetailViewController.h */,
 				0024EFCE2325DAFE001A6BC6 /* ZFPlayerDetailViewController.m */,
-				0024EC882325D900001A6BC6 /* VideoViewController.h */,
-				0024EC852325D900001A6BC6 /* VideoViewController.m */,
-				002C821E234C146700D0D718 /* VideoCell.h */,
-				002C821F234C146700D0D718 /* VideoCell.m */,
-				002C8221234C25E900D0D718 /* AppUserModel.h */,
-				002C8222234C25E900D0D718 /* AppUserModel.m */,
-				002C8224234C266700D0D718 /* VideoModel.h */,
-				002C8225234C266700D0D718 /* VideoModel.m */,
 			);
 			path = "视频测试";
 			sourceTree = "<group>";
@@ -971,6 +963,14 @@
 		009A3173230F9AF500515B4B /* 视频 */ = {
 			isa = PBXGroup;
 			children = (
+				0024EC882325D900001A6BC6 /* VideoViewController.h */,
+				0024EC852325D900001A6BC6 /* VideoViewController.m */,
+				002C821E234C146700D0D718 /* VideoCell.h */,
+				002C821F234C146700D0D718 /* VideoCell.m */,
+				002C8221234C25E900D0D718 /* AppUserModel.h */,
+				002C8222234C25E900D0D718 /* AppUserModel.m */,
+				002C8224234C266700D0D718 /* VideoModel.h */,
+				002C8225234C266700D0D718 /* VideoModel.m */,
 				0024EC3E2320F0F9001A6BC6 /* 视频测试 */,
 				009A3174230F9AF500515B4B /* Controller */,
 			);
