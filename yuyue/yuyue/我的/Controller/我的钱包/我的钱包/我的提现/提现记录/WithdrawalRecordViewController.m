@@ -71,6 +71,7 @@
         }
         else
         {
+            //SVProgressHUD
             [SVProgressHUD showErrorWithStatus:@"暂无提现记录"];
            // _minimumDismissTimeInterval = 2；
         }

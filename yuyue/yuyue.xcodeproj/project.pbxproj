@@ -70,6 +70,9 @@
 		0028B64D233F619A0067E1EF /* SexPickerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0028B64B233F619A0067E1EF /* SexPickerTool.m */; };
 		0028B64E233F619A0067E1EF /* SexPickerTool.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0028B64C233F619A0067E1EF /* SexPickerTool.xib */; };
 		002A04922339C017003DF5FA /* FocusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 002A04912339C017003DF5FA /* FocusModel.m */; };
+		002C8220234C146700D0D718 /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C821F234C146700D0D718 /* VideoCell.m */; };
+		002C8223234C25E900D0D718 /* AppUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C8222234C25E900D0D718 /* AppUserModel.m */; };
+		002C8226234C266700D0D718 /* VideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C8225234C266700D0D718 /* VideoModel.m */; };
 		002C9B0623384F70007A2798 /* ShowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C9B0523384F70007A2798 /* ShowTableViewCell.m */; };
 		002C9B0923386219007A2798 /* ShowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C9B0823386219007A2798 /* ShowModel.m */; };
 		002C9B0C23386667007A2798 /* ShowSiteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C9B0B23386667007A2798 /* ShowSiteModel.m */; };
@@ -264,6 +267,12 @@
 		0028B64C233F619A0067E1EF /* SexPickerTool.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SexPickerTool.xib; sourceTree = "<group>"; };
 		002A04902339C017003DF5FA /* FocusModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FocusModel.h; sourceTree = "<group>"; };
 		002A04912339C017003DF5FA /* FocusModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FocusModel.m; sourceTree = "<group>"; };
+		002C821E234C146700D0D718 /* VideoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoCell.h; sourceTree = "<group>"; };
+		002C821F234C146700D0D718 /* VideoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCell.m; sourceTree = "<group>"; };
+		002C8221234C25E900D0D718 /* AppUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppUserModel.h; sourceTree = "<group>"; };
+		002C8222234C25E900D0D718 /* AppUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppUserModel.m; sourceTree = "<group>"; };
+		002C8224234C266700D0D718 /* VideoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoModel.h; sourceTree = "<group>"; };
+		002C8225234C266700D0D718 /* VideoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoModel.m; sourceTree = "<group>"; };
 		002C9B0423384F70007A2798 /* ShowTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowTableViewCell.h; sourceTree = "<group>"; };
 		002C9B0523384F70007A2798 /* ShowTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowTableViewCell.m; sourceTree = "<group>"; };
 		002C9B0723386219007A2798 /* ShowModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowModel.h; sourceTree = "<group>"; };
@@ -551,6 +560,12 @@
 				0024EFCE2325DAFE001A6BC6 /* ZFPlayerDetailViewController.m */,
 				0024EC882325D900001A6BC6 /* VideoViewController.h */,
 				0024EC852325D900001A6BC6 /* VideoViewController.m */,
+				002C821E234C146700D0D718 /* VideoCell.h */,
+				002C821F234C146700D0D718 /* VideoCell.m */,
+				002C8221234C25E900D0D718 /* AppUserModel.h */,
+				002C8222234C25E900D0D718 /* AppUserModel.m */,
+				002C8224234C266700D0D718 /* VideoModel.h */,
+				002C8225234C266700D0D718 /* VideoModel.m */,
 			);
 			path = "视频测试";
 			sourceTree = "<group>";
@@ -1380,6 +1395,7 @@
 				00327CDF232F945D006D249D /* GiftViewController.m in Sources */,
 				006AF1B62339FCE0004DDBC5 /* HDLTableData.m in Sources */,
 				002C9B0C23386667007A2798 /* ShowSiteModel.m in Sources */,
+				002C8226234C266700D0D718 /* VideoModel.m in Sources */,
 				002C9B1E23389D26007A2798 /* CityModel.m in Sources */,
 				00327CD8232F1346006D249D /* RechangCommonBtn.m in Sources */,
 				0024EC0E231FAA24001A6BC6 /* NSString+Size.m in Sources */,
@@ -1388,6 +1404,7 @@
 				0025C57A231CC3C50079DF4E /* UIView+keyboard.m in Sources */,
 				009A31F7230F9B1700515B4B /* ModifyPhoneViewController.m in Sources */,
 				002C9B1D23389D26007A2798 /* GLCoderObject.m in Sources */,
+				002C8223234C25E900D0D718 /* AppUserModel.m in Sources */,
 				001EE81B23320336009FCC11 /* MainADView.m in Sources */,
 				00327CE2232F947A006D249D /* GiftTableViewCell.m in Sources */,
 				0044F25223168C5100498D51 /* PromoteViewController.m in Sources */,
@@ -1476,6 +1493,7 @@
 				009A31F2230F9B1700515B4B /* BassInformationTableViewCell.m in Sources */,
 				0027BE6D2327A1AA00049B61 /* CommonUserView.m in Sources */,
 				00327CDB232F1366006D249D /* RechangMoneyViewController.m in Sources */,
+				002C8220234C146700D0D718 /* VideoCell.m in Sources */,
 				00327CEF2330DC83006D249D /* MyAdvertiserModel.m in Sources */,
 				002F1D2C233CA8760080F169 /* WXAuth.m in Sources */,
 				009A31FF230F9B1700515B4B /* LoginView.m in Sources */,

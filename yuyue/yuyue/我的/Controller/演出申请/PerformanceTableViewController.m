@@ -164,14 +164,15 @@
         UILabel *lab = [[UILabel alloc]initWithFrame:CGRectZero];
         lab.textAlignment = NSTextAlignmentLeft;
         lab.font = [UIFont fontWithName:@"PingFang-SC-Medium" size: 12];
-        lab.text = @"请确认填写信息真实，如有违法违规行为信息将作为有关部门证据";
+        lab.numberOfLines = 0;
+        lab.text = @"请确认填写信息真实，如有违法违规行为信息将作为有关部门证据hahh hauhfjahvfdjjfdcjvfdjvjdc dcdcdvc";
         lab.textColor = RGBA(153, 153, 153, 1);
         [footer addSubview:lab];
         [lab makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(footer.centerY);
             make.right.equalTo(0);
             make.left.equalTo(15);
-            make.height.equalTo(14);
+            make.height.equalTo(60);
         }];
         footer.backgroundColor = RGBA(243, 243, 243, 1);
     }
@@ -182,7 +183,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 0;
+        return 0.1;
     }
     else
         return 30;

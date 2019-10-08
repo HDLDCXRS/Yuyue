@@ -47,10 +47,8 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[UIApplication sendAction:to:from:forEvent:]"
-                  moduleName = "UIKitCore"
                   usesParentBreakpointCondition = "Yes"
-                  offsetFromSymbolStart = "72">
+                  offsetFromSymbolStart = "0">
                </Location>
             </Locations>
          </BreakpointContent>
