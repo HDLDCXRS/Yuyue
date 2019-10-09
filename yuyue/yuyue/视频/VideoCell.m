@@ -47,8 +47,8 @@
         [_iconImage makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.bgcImageView.bottom).offset(5);
             make.left.equalTo(15);
-            make.width.equalTo(size.width);
-            make.height.equalTo(size.height);
+            make.width.equalTo(19);
+            make.height.equalTo(19);
         }];
         _iconLabel = [[UILabel alloc] init];
         _iconLabel.font = [UIFont fontWithName:@"PingFang SC" size: 14];
@@ -77,6 +77,7 @@
         _commentLabel.font = [UIFont fontWithName:@"PingFang SC" size: 13];
         _commentLabel.textColor = RGBA(153, 153, 153, 1);
         _commentLabel.text = @"0评论";
+        _commentLabel.textAlignment = NSTextAlignmentRight;
         [self addSubview:_commentLabel];
         [_commentLabel makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.likeLabel.centerY);
@@ -87,14 +88,6 @@
     }
     return self;
 }
-
-//-(void)setAppUserModel:(AppUserModel * _Nonnull)appUserModel
-//{
-//    [_iconImage sd_setImageWithURL:appUserModel.headpUrl];
-//    _iconLabel.text = appUserModel.nickName;
-//    _commentLabel.text = [NSString stringWithFormat:@"%@评论",appUserModel.attentionTotal];
-//    _likeLabel.text =  [NSString stringWithFormat:@"%@关注",appUserModel.likeTotal];
-//}
 - (void)setBgcModel:(VideoModel *)bgcModel
 {
     [_bgcImageView sd_setImageWithURL:bgcModel.videoAddress];
@@ -102,6 +95,6 @@
     _iconLabel.text = bgcModel.appUser.nickName;
     _commentLabel.text = [NSString stringWithFormat:@"%@评论",bgcModel.appUser.attentionTotal];
     _likeLabel.text =  [NSString stringWithFormat:@"%@关注",bgcModel.appUser.likeTotal];
-    _titleLabel.text =bgcModel.title;
+    _titleLabel.text = bgcModel.title;
 }
 @end

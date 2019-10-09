@@ -16,7 +16,6 @@
 #import "DiverSceneViewController.h"
 #import "SpeedView.h"
 #import "CustomHeadView.h"
-
 //视频
 #import <ZFPlayer/ZFAVPlayerManager.h>
 #import <ZFPlayer/ZFPlayerControlView.h>
@@ -33,13 +32,11 @@ static NSString *kIdentifier = @"kIdentifier";
 @property(nonatomic,strong) NSMutableArray  * shuffingAry;
 @property(nonatomic,strong) CustomHeadView  *headView;
 @property(nonatomic,strong) UITableView  *tableView;
-//
 @property (nonatomic, strong) ZFPlayerController *player;
 @property (nonatomic, strong) ZFPlayerControlView *controlView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSMutableArray *urls;
 @end
-
 @implementation FirstPageViewController
 -(AFHTTPSessionManager *)manager
 {

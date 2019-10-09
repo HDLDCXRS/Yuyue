@@ -67,11 +67,7 @@
     [_timer fire];
     // _timer加入的是NSDefaultRunLoopMode,没有加入NSEventTrackingRunLoopMode,所以拖动的时候不需要在停止timer
     [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
-    
-    
 }
-
-
 // NSInteger的取值范围是2^63-1,9 223 372 036 854 775 807大约是9*10^18,所以肯定不会超的
 // 就算dataSourse里面只有一个元素,1s滑动一次,需要滑动50000次,用户需要无聊的滑动13多个小时才会滑到最右边,如果对10W还是不放心,那就改成100W
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -145,10 +141,7 @@
         
     }
 }
-
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
     CGFloat ScreenWidth = [UIScreen mainScreen].bounds.size.width;
     for (UICollectionViewCell * cell in self.colloectView.visibleCells) {
         CGPoint centerPoint = [self convertPoint:cell.center fromView:scrollView];
@@ -157,8 +150,6 @@
         // 中间的为1,旁边2个为0.9
         CGFloat scale = 1-0.1*d ;
         cell.layer.transform = CATransform3DMakeScale(scale, scale, 1);
-        
-        
     }
     
 }
@@ -193,8 +184,6 @@
     }
     return _colloectView;
 }
-
-
 - (void)dealloc {
     NSLog(@"%@ dealloc , 没有timer循环引用",[self class]);
 }
