@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 //@property(nonatomic,strong) AppUserModel  *appUserModel;
 @property(nonatomic,strong) VideoModel  *bgcModel;
 -(void)setBgcModel:(VideoModel * _Nonnull)bgcModel;
-//-(void)setAppUserModel:(AppUserModel * _Nonnull)appUserModel;
+
 
 @end
 

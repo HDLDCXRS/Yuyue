@@ -20,13 +20,15 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         _bgcImageView = [[UIImageView alloc] init];
         _bgcImageView.image = [UIImage imageNamed:@"图层0"];
+        _bgcImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _bgcImageView.clipsToBounds = YES;
         CGSize size = _bgcImageView.image.size;
         [self addSubview:_bgcImageView];
         [_bgcImageView makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(0);
             make.left.equalTo(15);
             make.right.equalTo(-15);
-            make.height.equalTo(size.height);
+            make.height.equalTo(191);
         }];
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = [UIFont fontWithName:@"PingFang SC" size: 15];

@@ -9,7 +9,7 @@
 #import "VideoViewController.h"
 #import "VideoCell.h"
 #import "VideoModel.h"
-#import "AppUserModel.h"
+
 #import "CustomSearchView.h"
 #import "DetailVideoViewController.h" //视频详情页面
 @interface VideoViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -80,14 +80,56 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.tableFooterView = [UIView new];
-    _page = 1;
+    //_page = 1;
     [self LoadData];
+    
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(LoadData)];
     [self.tableView.mj_header beginRefreshing];
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(LoadMoreData)];
     [self.tableView.mj_footer beginRefreshing];
-    //
-    
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectZero];
+    [btn setImage:[UIImage imageNamed:@"回到顶部"] forState:UIControlStateNormal];
+    CGSize size = btn.currentImage.size;
+    [self.view addSubview:btn];
+    [btn makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.offset(-TabBar_Height-69);
+        make.right.equalTo(-19);
+        make.size.equalTo(CGSizeMake(size.width, size.height));
+    }];
+    [btn addTarget:self action:@selector(toTopViewMethod) forControlEvents:UIControlEventTouchUpInside];
+}
+#pragma mark - MJRefreshEXDelegate
+- (void)onRefreshing:(id)control {
+    [self requestNetWorkingWithPageNum:1 isHeader:YES];
+}
+
+- (void)onLoadingMoreData:(id)control pageNum:(NSNumber *)pageNum {
+    [self requestNetWorkingWithPageNum:pageNum.integerValue isHeader:NO];
+}
+- (void)requestNetWorkingWithPageNum:(NSInteger)pageNum isHeader:(BOOL)isHeader {
+    NSDictionary *dic = @{
+                          @"page":[NSString stringWithFormat:@"%ld",(long)self.page]
+                          };
+    typeof(self) weakSelf = self;
+    [self.manager POST:@"uploadFile/getVideo" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if ([responseObject[@"status"] boolValue] == true) {
+            NSMutableArray *tempArr = [[NSMutableArray alloc]init];
+            tempArr = (NSMutableArray *)[NSArray yy_modelArrayWithClass:[VideoModel class] json:responseObject[@"result"]];
+            if (self.videoArr.count<8 || isHeader) {
+                
+            }
+            [weakSelf.tableView reloadData];
+            [weakSelf.tableView.mj_header endRefreshing];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [weakSelf.tableView.mj_footer endRefreshing];
+        [weakSelf.tableView.mj_header endRefreshing];
+    }];
+}
+//回到顶部
+-(void)toTopViewMethod
+{
+    [self.tableView  scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
 }
 #pragma mark  tableViewDelegate  datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -96,12 +138,14 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *iden = @"messageCell";
+    NSString *iden = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
     VideoCell *cell = [tableView dequeueReusableCellWithIdentifier:iden];
     if (!cell) {
         cell = [[VideoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:iden];
         cell.bgcModel = _videoArr[indexPath.row];
     }
+//    VideoCell *cell = [[VideoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+//    cell.bgcModel =_videoArr[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -109,7 +153,7 @@
 {
     return 221;
 }
-//获取数据
+////获取数据
 -(void)LoadData
 {
     self.page=1;
@@ -118,9 +162,10 @@
                           @"page":[NSString stringWithFormat:@"%ld",(long)self.page]
                           };
      typeof(self) weakSelf = self;
-        [self.manager POST:@"homePage/getVideoToHomePage" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self.manager POST:@"uploadFile/getVideo" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             if ([responseObject[@"status"] boolValue] == true) {
                 weakSelf.videoArr = (NSMutableArray *)[NSArray yy_modelArrayWithClass:[VideoModel class] json:responseObject[@"result"]];
+                NSLog(@"%@",weakSelf.videoArr[0]);
                 //NSLog(@"%lu",(unsigned long)arr.count);
                 [weakSelf.tableView reloadData];
                 [weakSelf.tableView.mj_header endRefreshing];
@@ -131,22 +176,23 @@
         }];
 
 }
-//加载更多
+////加载更多
 -(void)LoadMoreData
 {
     //_page +=1;
-    self.page = self.page +1;
+    self.page = self.page + 1;
     NSDictionary *dic = @{
-                          @"page":[NSString stringWithFormat:@"%ld",self.page]
+                          @"page":[NSString stringWithFormat:@"%ld",(long)self.page]
                           };
     typeof(self) weakSelf = self;
     NSLog(@"%ld",(long)self.page);
-    [self.manager POST:@"homePage/getVideoToHomePage" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager POST:@"uploadFile/getVideo" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"status"] boolValue] == true) {
             NSMutableArray *mustArr = (NSMutableArray *)[NSArray yy_modelArrayWithClass:[VideoModel class] json:responseObject[@"result"]];
             if (mustArr.count == 0) {
-                self.page =1;
+                self.page = self.page -1;
                 [weakSelf.tableView.mj_footer endRefreshing];
+                return ;
 //                [weakSelf.tableView reloadData];
             }
             else
@@ -160,7 +206,7 @@
             }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [weakSelf.tableView.mj_footer endRefreshing];
+         [weakSelf.tableView.mj_footer endRefreshing];
          [weakSelf.tableView.mj_header endRefreshing];
     }];
 }
