@@ -143,6 +143,7 @@
                 weakSelf.videoArr = (NSMutableArray *)[NSArray yy_modelArrayWithClass:[VideoModel class] json:responseObject[@"result"]];
                 [weakSelf.tableView reloadData];
                 [weakSelf.tableView.mj_header endRefreshing];
+                self.page =self.page -1;
             }
             else
             {
@@ -164,7 +165,7 @@
     }
     else
     {
-    self.page = self.page +1;
+   
     NSDictionary *dic = @{
                           @"page":[NSString stringWithFormat:@"%ld",(long)self.page],
                           @"content":self.searchBar.text
@@ -175,9 +176,7 @@
         if ([responseObject[@"status"] boolValue] == true) {
             NSMutableArray *mustArr = (NSMutableArray *)[NSArray yy_modelArrayWithClass:[VideoModel class] json:responseObject[@"result"]];
             if (mustArr.count == 0) {
-                self.page =self.page -1;
                 [weakSelf.tableView.mj_footer endRefreshing];
-                //                [weakSelf.tableView reloadData];
             }
             else
             {
@@ -186,6 +185,7 @@
                     // [mustArr addObjectsFromArray:weakSelf.videoArr];
                     [weakSelf.tableView reloadData];
                     [weakSelf.tableView.mj_footer endRefreshing];
+                    self.page =self.page -1;
                 });
             }
         }

@@ -70,6 +70,8 @@
 		0028B64D233F619A0067E1EF /* SexPickerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0028B64B233F619A0067E1EF /* SexPickerTool.m */; };
 		0028B64E233F619A0067E1EF /* SexPickerTool.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0028B64C233F619A0067E1EF /* SexPickerTool.xib */; };
 		002A04922339C017003DF5FA /* FocusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 002A04912339C017003DF5FA /* FocusModel.m */; };
+		002C70E823500BFA00767615 /* ZFCustomControlView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C70E523500BFA00767615 /* ZFCustomControlView1.m */; };
+		002C70E923500BFA00767615 /* ZFCustomControlViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C70E723500BFA00767615 /* ZFCustomControlViewViewController.m */; };
 		002C8220234C146700D0D718 /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C821F234C146700D0D718 /* VideoCell.m */; };
 		002C8223234C25E900D0D718 /* AppUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C8222234C25E900D0D718 /* AppUserModel.m */; };
 		002C8226234C266700D0D718 /* VideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C8225234C266700D0D718 /* VideoModel.m */; };
@@ -269,6 +271,10 @@
 		0028B64C233F619A0067E1EF /* SexPickerTool.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SexPickerTool.xib; sourceTree = "<group>"; };
 		002A04902339C017003DF5FA /* FocusModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FocusModel.h; sourceTree = "<group>"; };
 		002A04912339C017003DF5FA /* FocusModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FocusModel.m; sourceTree = "<group>"; };
+		002C70E423500BFA00767615 /* ZFCustomControlViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFCustomControlViewViewController.h; sourceTree = "<group>"; };
+		002C70E523500BFA00767615 /* ZFCustomControlView1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFCustomControlView1.m; sourceTree = "<group>"; };
+		002C70E623500BFA00767615 /* ZFCustomControlView1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFCustomControlView1.h; sourceTree = "<group>"; };
+		002C70E723500BFA00767615 /* ZFCustomControlViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFCustomControlViewViewController.m; sourceTree = "<group>"; };
 		002C821E234C146700D0D718 /* VideoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoCell.h; sourceTree = "<group>"; };
 		002C821F234C146700D0D718 /* VideoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCell.m; sourceTree = "<group>"; };
 		002C8221234C25E900D0D718 /* AppUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppUserModel.h; sourceTree = "<group>"; };
@@ -709,6 +715,17 @@
 			path = "我的钱包";
 			sourceTree = "<group>";
 		};
+		002C70CB234EBE2300767615 /* 视频播放 */ = {
+			isa = PBXGroup;
+			children = (
+				002C70E623500BFA00767615 /* ZFCustomControlView1.h */,
+				002C70E523500BFA00767615 /* ZFCustomControlView1.m */,
+				002C70E423500BFA00767615 /* ZFCustomControlViewViewController.h */,
+				002C70E723500BFA00767615 /* ZFCustomControlViewViewController.m */,
+			);
+			path = "视频播放";
+			sourceTree = "<group>";
+		};
 		002C9B1323389D25007A2798 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -990,6 +1007,7 @@
 		009A3174230F9AF500515B4B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				002C70CB234EBE2300767615 /* 视频播放 */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1440,6 +1458,7 @@
 				0024EC322320A68D001A6BC6 /* GYZCityGroupCell.m in Sources */,
 				00243876232D29A900827E31 /* DetailScenceTableViewCell.m in Sources */,
 				00FF2745231622D200E0E9CC /* FeedBackView.m in Sources */,
+				002C70E823500BFA00767615 /* ZFCustomControlView1.m in Sources */,
 				009A3192230F9B1100515B4B /* UIAlertController+CHYCustomAlert.m in Sources */,
 				002F1D1B233C68740080F169 /* BindingAccountViewController.m in Sources */,
 				006AF1BF2339FFB1004DDBC5 /* MyCommentModel.m in Sources */,
@@ -1490,6 +1509,7 @@
 				002C9B272338C413007A2798 /* FocusCollectionCell.m in Sources */,
 				0024EFD82326158C001A6BC6 /* CheckCode.m in Sources */,
 				0024EFD22325DAFE001A6BC6 /* ZFPlayerDetailViewController.m in Sources */,
+				002C70E923500BFA00767615 /* ZFCustomControlViewViewController.m in Sources */,
 				006AF1BC2339FDFE004DDBC5 /* MyCommentViewController.m in Sources */,
 				00243873232D297A00827E31 /* DetailSceneTableViewController.m in Sources */,
 				0027BE7B2328C02B00049B61 /* PerformanceTableViewCell.m in Sources */,

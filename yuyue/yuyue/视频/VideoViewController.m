@@ -9,7 +9,7 @@
 #import "VideoViewController.h"
 #import "VideoCell.h"
 #import "VideoModel.h"
-
+#import "ZFCustomControlViewViewController.h"//视频详情播放
 #import "CustomSearchView.h"
 #import "DetailVideoViewController.h" //视频详情页面
 @interface VideoViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -18,6 +18,7 @@
 @property(nonatomic,assign) NSInteger   page;
 @property(nonatomic,strong) NSMutableArray  *videoArr;
 @property(nonatomic,strong) CustomSearchView  *searchView;
+
 
 @end
 @implementation VideoViewController
@@ -37,6 +38,7 @@
     [super viewDidLoad];
     [self initSearchView];
     [self initWithTableView];
+  
 }
 -(void)initSearchView
 {
@@ -80,13 +82,28 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.tableFooterView = [UIView new];
-    //_page = 1;
-    [self LoadData];
+    // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
     
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(LoadData)];
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(LoadData)];
+    // 设置文字
+    [header setTitle:@"正在刷新" forState:MJRefreshStateIdle];
+    [header setTitle:@"正在刷新" forState:MJRefreshStatePulling];
+    [header setTitle:@"服务器正在狂奔 ..." forState:MJRefreshStateRefreshing];
+    // 马上进入刷新状态
+    [header beginRefreshing];
+    // 设置刷新控件
+    self.tableView.mj_header = header;
+   
     [self.tableView.mj_header beginRefreshing];
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(LoadMoreData)];
-    [self.tableView.mj_footer beginRefreshing];
+     MJRefreshAutoStateFooter *footer = [MJRefreshAutoStateFooter footerWithRefreshingBlock:^{
+        [self.tableView.mj_footer beginRefreshing];
+        [self LoadMoreData];
+    }];
+    [footer setTitle:@"我是有底线的" forState:MJRefreshStateIdle];
+    [footer setTitle:@"我是有底的" forState:MJRefreshStatePulling];
+    [footer setTitle:@"服务器正在狂奔 ..." forState:MJRefreshStateRefreshing];
+//     [header setTitle:@"我是有底线的" forState:MJRefreshStateIdle];
+      self.tableView.mj_footer = footer;
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectZero];
     [btn setImage:[UIImage imageNamed:@"回到顶部"] forState:UIControlStateNormal];
     CGSize size = btn.currentImage.size;
@@ -97,34 +114,6 @@
         make.size.equalTo(CGSizeMake(size.width, size.height));
     }];
     [btn addTarget:self action:@selector(toTopViewMethod) forControlEvents:UIControlEventTouchUpInside];
-}
-#pragma mark - MJRefreshEXDelegate
-- (void)onRefreshing:(id)control {
-    [self requestNetWorkingWithPageNum:1 isHeader:YES];
-}
-
-- (void)onLoadingMoreData:(id)control pageNum:(NSNumber *)pageNum {
-    [self requestNetWorkingWithPageNum:pageNum.integerValue isHeader:NO];
-}
-- (void)requestNetWorkingWithPageNum:(NSInteger)pageNum isHeader:(BOOL)isHeader {
-    NSDictionary *dic = @{
-                          @"page":[NSString stringWithFormat:@"%ld",(long)self.page]
-                          };
-    typeof(self) weakSelf = self;
-    [self.manager POST:@"uploadFile/getVideo" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if ([responseObject[@"status"] boolValue] == true) {
-            NSMutableArray *tempArr = [[NSMutableArray alloc]init];
-            tempArr = (NSMutableArray *)[NSArray yy_modelArrayWithClass:[VideoModel class] json:responseObject[@"result"]];
-            if (self.videoArr.count<8 || isHeader) {
-                
-            }
-            [weakSelf.tableView reloadData];
-            [weakSelf.tableView.mj_header endRefreshing];
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [weakSelf.tableView.mj_footer endRefreshing];
-        [weakSelf.tableView.mj_header endRefreshing];
-    }];
 }
 //回到顶部
 -(void)toTopViewMethod
@@ -144,8 +133,6 @@
         cell = [[VideoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:iden];
         cell.bgcModel = _videoArr[indexPath.row];
     }
-//    VideoCell *cell = [[VideoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-//    cell.bgcModel =_videoArr[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -163,55 +150,57 @@
                           };
      typeof(self) weakSelf = self;
         [self.manager POST:@"uploadFile/getVideo" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+         
             if ([responseObject[@"status"] boolValue] == true) {
+                //NSMutableArray * arr = [[NSMutableArray alloc] init];
                 weakSelf.videoArr = (NSMutableArray *)[NSArray yy_modelArrayWithClass:[VideoModel class] json:responseObject[@"result"]];
-                NSLog(@"%@",weakSelf.videoArr[0]);
-                //NSLog(@"%lu",(unsigned long)arr.count);
-                [weakSelf.tableView reloadData];
-                [weakSelf.tableView.mj_header endRefreshing];
+                 self.page = self.page +1;
+                 [weakSelf.tableView.mj_header endRefreshing];
+
             }
+            [weakSelf.tableView reloadData];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [weakSelf.tableView.mj_footer endRefreshing];
             [weakSelf.tableView.mj_header endRefreshing];
         }];
-
+    
 }
 ////加载更多
 -(void)LoadMoreData
 {
-    //_page +=1;
-    self.page = self.page + 1;
-    NSDictionary *dic = @{
-                          @"page":[NSString stringWithFormat:@"%ld",(long)self.page]
+     NSDictionary *dic = @{
+                          @"page":[NSString stringWithFormat:@"%ld",(long)self.page],
                           };
-    typeof(self) weakSelf = self;
-    NSLog(@"%ld",(long)self.page);
-    [self.manager POST:@"uploadFile/getVideo" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+     typeof(self) weakSelf = self;
+     NSLog(@"%ld",(long)self.page);
+     [self.manager POST:@"uploadFile/getVideo?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"status"] boolValue] == true) {
             NSMutableArray *mustArr = (NSMutableArray *)[NSArray yy_modelArrayWithClass:[VideoModel class] json:responseObject[@"result"]];
             if (mustArr.count == 0) {
-                self.page = self.page -1;
-                [weakSelf.tableView.mj_footer endRefreshing];
-                return ;
-//                [weakSelf.tableView reloadData];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [weakSelf.tableView.mj_footer endRefreshing];
+                });
             }
             else
             {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                   [weakSelf.videoArr addObjectsFromArray:mustArr];
-                   // [mustArr addObjectsFromArray:weakSelf.videoArr];
+                    [weakSelf.videoArr addObjectsFromArray:mustArr];
                     [weakSelf.tableView reloadData];
                     [weakSelf.tableView.mj_footer endRefreshing];
+                     self.page = self.page+1;
                 });
             }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-         [weakSelf.tableView.mj_footer endRefreshing];
-         [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf.tableView.mj_footer endRefreshing];
+        [weakSelf.tableView.mj_header endRefreshing];
     }];
+    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //NSLog(@"++++++");
+    ZFCustomControlViewViewController *vc = [[ZFCustomControlViewViewController alloc] init];
+     vc.model = _videoArr[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end
