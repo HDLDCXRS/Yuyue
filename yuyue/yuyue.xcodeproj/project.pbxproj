@@ -72,6 +72,11 @@
 		002A04922339C017003DF5FA /* FocusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 002A04912339C017003DF5FA /* FocusModel.m */; };
 		002C70E823500BFA00767615 /* ZFCustomControlView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C70E523500BFA00767615 /* ZFCustomControlView1.m */; };
 		002C70E923500BFA00767615 /* ZFCustomControlViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C70E723500BFA00767615 /* ZFCustomControlViewViewController.m */; };
+		002C70EC2350448B00767615 /* BanKuanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C70EB2350448B00767615 /* BanKuanView.m */; };
+		002C70F0235055A300767615 /* HostStyleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C70EF235055A300767615 /* HostStyleViewController.m */; };
+		002C70F32350560800767615 /* HostStyleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C70F22350560800767615 /* HostStyleView.m */; };
+		002C70F62350649E00767615 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C70F52350649E00767615 /* CommentTableViewCell.m */; };
+		002C70FA2350803C00767615 /* WriteCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C70F92350803C00767615 /* WriteCommentView.m */; };
 		002C8220234C146700D0D718 /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C821F234C146700D0D718 /* VideoCell.m */; };
 		002C8223234C25E900D0D718 /* AppUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C8222234C25E900D0D718 /* AppUserModel.m */; };
 		002C8226234C266700D0D718 /* VideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 002C8225234C266700D0D718 /* VideoModel.m */; };
@@ -275,6 +280,16 @@
 		002C70E523500BFA00767615 /* ZFCustomControlView1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFCustomControlView1.m; sourceTree = "<group>"; };
 		002C70E623500BFA00767615 /* ZFCustomControlView1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFCustomControlView1.h; sourceTree = "<group>"; };
 		002C70E723500BFA00767615 /* ZFCustomControlViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFCustomControlViewViewController.m; sourceTree = "<group>"; };
+		002C70EA2350448B00767615 /* BanKuanView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BanKuanView.h; sourceTree = "<group>"; };
+		002C70EB2350448B00767615 /* BanKuanView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BanKuanView.m; sourceTree = "<group>"; };
+		002C70EE235055A300767615 /* HostStyleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HostStyleViewController.h; sourceTree = "<group>"; };
+		002C70EF235055A300767615 /* HostStyleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HostStyleViewController.m; sourceTree = "<group>"; };
+		002C70F12350560800767615 /* HostStyleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HostStyleView.h; sourceTree = "<group>"; };
+		002C70F22350560800767615 /* HostStyleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HostStyleView.m; sourceTree = "<group>"; };
+		002C70F42350649E00767615 /* CommentTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
+		002C70F52350649E00767615 /* CommentTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewCell.m; sourceTree = "<group>"; };
+		002C70F82350803C00767615 /* WriteCommentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WriteCommentView.h; sourceTree = "<group>"; };
+		002C70F92350803C00767615 /* WriteCommentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WriteCommentView.m; sourceTree = "<group>"; };
 		002C821E234C146700D0D718 /* VideoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoCell.h; sourceTree = "<group>"; };
 		002C821F234C146700D0D718 /* VideoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCell.m; sourceTree = "<group>"; };
 		002C8221234C25E900D0D718 /* AppUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppUserModel.h; sourceTree = "<group>"; };
@@ -718,12 +733,37 @@
 		002C70CB234EBE2300767615 /* 视频播放 */ = {
 			isa = PBXGroup;
 			children = (
+				002C70F723507FD100767615 /* 评论 */,
 				002C70E623500BFA00767615 /* ZFCustomControlView1.h */,
 				002C70E523500BFA00767615 /* ZFCustomControlView1.m */,
 				002C70E423500BFA00767615 /* ZFCustomControlViewViewController.h */,
 				002C70E723500BFA00767615 /* ZFCustomControlViewViewController.m */,
+				002C70EA2350448B00767615 /* BanKuanView.h */,
+				002C70EB2350448B00767615 /* BanKuanView.m */,
+				002C70F42350649E00767615 /* CommentTableViewCell.h */,
+				002C70F52350649E00767615 /* CommentTableViewCell.m */,
 			);
 			path = "视频播放";
+			sourceTree = "<group>";
+		};
+		002C70ED2350556700767615 /* 爆款 */ = {
+			isa = PBXGroup;
+			children = (
+				002C70EE235055A300767615 /* HostStyleViewController.h */,
+				002C70EF235055A300767615 /* HostStyleViewController.m */,
+				002C70F12350560800767615 /* HostStyleView.h */,
+				002C70F22350560800767615 /* HostStyleView.m */,
+			);
+			path = "爆款";
+			sourceTree = "<group>";
+		};
+		002C70F723507FD100767615 /* 评论 */ = {
+			isa = PBXGroup;
+			children = (
+				002C70F82350803C00767615 /* WriteCommentView.h */,
+				002C70F92350803C00767615 /* WriteCommentView.m */,
+			);
+			path = "评论";
 			sourceTree = "<group>";
 		};
 		002C9B1323389D25007A2798 /* Model */ = {
@@ -1007,6 +1047,7 @@
 		009A3174230F9AF500515B4B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				002C70ED2350556700767615 /* 爆款 */,
 				002C70CB234EBE2300767615 /* 视频播放 */,
 			);
 			path = Controller;
@@ -1431,7 +1472,9 @@
 				00620B8C2316116600178559 /* HBK_ScanViewController.m in Sources */,
 				0025C57A231CC3C50079DF4E /* UIView+keyboard.m in Sources */,
 				009A31F7230F9B1700515B4B /* ModifyPhoneViewController.m in Sources */,
+				002C70F62350649E00767615 /* CommentTableViewCell.m in Sources */,
 				002C9B1D23389D26007A2798 /* GLCoderObject.m in Sources */,
+				002C70F0235055A300767615 /* HostStyleViewController.m in Sources */,
 				002C8223234C25E900D0D718 /* AppUserModel.m in Sources */,
 				001EE81B23320336009FCC11 /* MainADView.m in Sources */,
 				00327CE2232F947A006D249D /* GiftTableViewCell.m in Sources */,
@@ -1465,6 +1508,7 @@
 				009A3207230F9B1700515B4B /* CodeView.m in Sources */,
 				002C9B0623384F70007A2798 /* ShowTableViewCell.m in Sources */,
 				006AF1C8233B0C55004DDBC5 /* PostPhotoModel.m in Sources */,
+				002C70EC2350448B00767615 /* BanKuanView.m in Sources */,
 				009A320B230F9B1700515B4B /* MineArtView.m in Sources */,
 				006AF1AE2339D1CF004DDBC5 /* MinePublishModel.m in Sources */,
 				009A31F3230F9B1700515B4B /* MainLoginViewController.m in Sources */,
@@ -1485,6 +1529,7 @@
 				009A31F4230F9B1700515B4B /* MineMoneyViewController.m in Sources */,
 				009A3228230F9C0E00515B4B /* AppDelegate.m in Sources */,
 				001EE8122331EF43009FCC11 /* CustomeLocationBtn.m in Sources */,
+				002C70F32350560800767615 /* HostStyleView.m in Sources */,
 				00391075231DFFDD004C64C7 /* LoginModel.m in Sources */,
 				006AF1C5233AF967004DDBC5 /* LYYTextView.m in Sources */,
 				0024EFD02325DAFE001A6BC6 /* VideoTableViewCell.m in Sources */,
@@ -1544,6 +1589,7 @@
 				009A321F230F9B4200515B4B /* FirstPageViewController.m in Sources */,
 				009A31EE230F9B1700515B4B /* ForgetPasswordViewController.m in Sources */,
 				0024386B232CAA7B00827E31 /* DiverSceneViewController.m in Sources */,
+				002C70FA2350803C00767615 /* WriteCommentView.m in Sources */,
 				009A3202230F9B1700515B4B /* PerformanceTableViewController.m in Sources */,
 				009A31F9230F9B1700515B4B /* MinePublishViewController.m in Sources */,
 				009A31F8230F9B1700515B4B /* MinePublicTableViewCell.m in Sources */,

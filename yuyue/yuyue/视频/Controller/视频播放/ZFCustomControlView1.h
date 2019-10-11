@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <ZFPlayer/ZFPlayerMediaControl.h>
 #import "ZFSpeedLoadingView.h"
-
+#import "BanKuanView.h"
 NS_ASSUME_NONNULL_BEGIN
 typedef void(^popBlock)(UIButton *btn);
 @interface ZFCustomControlView1 : UIView <ZFPlayerMediaControl>
+
 
 @property(nonatomic,copy) popBlock  ClickPop;
 /// 控制层自动隐藏的时间，默认2.5秒

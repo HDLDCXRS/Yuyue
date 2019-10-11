@@ -518,6 +518,7 @@
 
 /// 视频view即将旋转
 - (void)videoPlayer:(ZFPlayerController *)videoPlayer orientationWillChange:(ZFOrientationObserver *)observer {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ViewHashChange" object:nil userInfo:nil];
     self.titleLabel.hidden = !self.titleLabel.isHidden;
     self.popBtn.hidden = !self.popBtn.isHidden;
     if (videoPlayer.isSmallFloatViewShow) {

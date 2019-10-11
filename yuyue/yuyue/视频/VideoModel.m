@@ -10,6 +10,6 @@
 
 @implementation VideoModel
 + (NSDictionary *)modelCustomPropertyMapper {
-    return @{@"desc":@"description"};
+    return @{@"desc":@"description",@"videoId":@"id"};
 }
 @end

@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) NSString  *filesName;
 @property(nonatomic,strong) NSString  *attentionAmount;
 @property(nonatomic,strong) NSString  *fileSize;
-@property(nonatomic,strong) NSString  *id;
+@property(nonatomic,strong) NSString  *videoId;
 @property(nonatomic,strong) NSString  *commentAmount;
 @property(nonatomic,strong) NSString  *categoryId;
 @property(nonatomic,strong) NSString  *status;
