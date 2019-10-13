@@ -112,6 +112,7 @@
 		005D1D212352F4F90018A8AF /* GetAllCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 005D1D202352F4F90018A8AF /* GetAllCommentModel.m */; };
 		005D1D29235323AE0018A8AF /* ProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005D1D28235323AE0018A8AF /* ProtocolViewController.m */; };
 		005D1D2B235325950018A8AF /* Protocalpolist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005D1D2A235325950018A8AF /* Protocalpolist.plist */; };
+		005D1D2F235343BF0018A8AF /* AdvertisingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005D1D2E235343BF0018A8AF /* AdvertisingViewController.m */; };
 		005F4E342314DE8C00F4B002 /* BusinessLicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F4E2E2314DE8C00F4B002 /* BusinessLicenseViewController.m */; };
 		005F4E352314DE8C00F4B002 /* AdvertistingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F4E2F2314DE8C00F4B002 /* AdvertistingViewController.m */; };
 		005F4E362314DE8C00F4B002 /* UploadIdCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F4E312314DE8C00F4B002 /* UploadIdCardViewController.m */; };
@@ -145,7 +146,6 @@
 		009A31F3230F9B1700515B4B /* MainLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A31AB230F9B1700515B4B /* MainLoginViewController.m */; };
 		009A31F4230F9B1700515B4B /* MineMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A31AD230F9B1700515B4B /* MineMoneyViewController.m */; };
 		009A31F5230F9B1700515B4B /* SetUpTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A31B1230F9B1700515B4B /* SetUpTableViewController.m */; };
-		009A31F6230F9B1700515B4B /* ModifyPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 009A31B3230F9B1700515B4B /* ModifyPhoneViewController.xib */; };
 		009A31F7230F9B1700515B4B /* ModifyPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A31B4230F9B1700515B4B /* ModifyPhoneViewController.m */; };
 		009A31F8230F9B1700515B4B /* MinePublicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A31B9230F9B1700515B4B /* MinePublicTableViewCell.m */; };
 		009A31F9230F9B1700515B4B /* MinePublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A31BA230F9B1700515B4B /* MinePublishViewController.m */; };
@@ -360,6 +360,8 @@
 		005D1D27235323AE0018A8AF /* ProtocolViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProtocolViewController.h; sourceTree = "<group>"; };
 		005D1D28235323AE0018A8AF /* ProtocolViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProtocolViewController.m; sourceTree = "<group>"; };
 		005D1D2A235325950018A8AF /* Protocalpolist.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Protocalpolist.plist; sourceTree = "<group>"; };
+		005D1D2D235343BF0018A8AF /* AdvertisingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdvertisingViewController.h; sourceTree = "<group>"; };
+		005D1D2E235343BF0018A8AF /* AdvertisingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdvertisingViewController.m; sourceTree = "<group>"; };
 		005F4E2D2314DE8C00F4B002 /* BusinessLicenseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessLicenseViewController.h; sourceTree = "<group>"; };
 		005F4E2E2314DE8C00F4B002 /* BusinessLicenseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessLicenseViewController.m; sourceTree = "<group>"; };
 		005F4E2F2314DE8C00F4B002 /* AdvertistingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertistingViewController.m; sourceTree = "<group>"; };
@@ -436,7 +438,6 @@
 		009A31AE230F9B1700515B4B /* MineMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineMoneyViewController.h; sourceTree = "<group>"; };
 		009A31B0230F9B1700515B4B /* SetUpTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetUpTableViewController.h; sourceTree = "<group>"; };
 		009A31B1230F9B1700515B4B /* SetUpTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetUpTableViewController.m; sourceTree = "<group>"; };
-		009A31B3230F9B1700515B4B /* ModifyPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyPhoneViewController.xib; sourceTree = "<group>"; };
 		009A31B4230F9B1700515B4B /* ModifyPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyPhoneViewController.m; sourceTree = "<group>"; };
 		009A31B5230F9B1700515B4B /* ModifyPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyPhoneViewController.h; sourceTree = "<group>"; };
 		009A31B7230F9B1700515B4B /* MinePublishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinePublishViewController.h; sourceTree = "<group>"; };
@@ -917,6 +918,15 @@
 			path = ../../../../..;
 			sourceTree = "<group>";
 		};
+		005D1D2C235342D60018A8AF /* 广告发布 */ = {
+			isa = PBXGroup;
+			children = (
+				005D1D2D235343BF0018A8AF /* AdvertisingViewController.h */,
+				005D1D2E235343BF0018A8AF /* AdvertisingViewController.m */,
+			);
+			path = "广告发布";
+			sourceTree = "<group>";
+		};
 		005F4E2A2314DE8C00F4B002 /* 广告推广 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1124,7 +1134,6 @@
 				009A31AF230F9B1700515B4B /* 设置 */,
 				009A31B2230F9B1700515B4B /* 修改手机号 */,
 				009A31B6230F9B1700515B4B /* 我的发布 */,
-				009A31CD230F9B1700515B4B /* 演出申请 */,
 				009A31D0230F9B1700515B4B /* 二维码 */,
 			);
 			path = Controller;
@@ -1179,7 +1188,6 @@
 		009A31B2230F9B1700515B4B /* 修改手机号 */ = {
 			isa = PBXGroup;
 			children = (
-				009A31B3230F9B1700515B4B /* ModifyPhoneViewController.xib */,
 				009A31B4230F9B1700515B4B /* ModifyPhoneViewController.m */,
 				009A31B5230F9B1700515B4B /* ModifyPhoneViewController.h */,
 			);
@@ -1286,6 +1294,8 @@
 		009A31E2230F9B1700515B4B /* 我的列表 */ = {
 			isa = PBXGroup;
 			children = (
+				009A31CD230F9B1700515B4B /* 演出申请 */,
+				005D1D2C235342D60018A8AF /* 广告发布 */,
 				002F1D2D233CA8F30080F169 /* 我的主界面 */,
 				006AF1B92339FDD5004DDBC5 /* 我的评论 */,
 				00327CE323306484006D249D /* 我的广告 */,
@@ -1422,7 +1432,6 @@
 				0028B60F233F06AD0067E1EF /* README.txt in Resources */,
 				009A3163230F9A4F00515B4B /* LaunchScreen.storyboard in Resources */,
 				009A3201230F9B1700515B4B /* ChangePasswordViewController.xib in Resources */,
-				009A31F6230F9B1700515B4B /* ModifyPhoneViewController.xib in Resources */,
 				0020D1BE23336E2F00A01C32 /* productIDS.plist in Resources */,
 				002C9B1F23389D26007A2798 /* city.json in Resources */,
 				00391081231E827B004C64C7 /* AboutOurViewController.xib in Resources */,
@@ -1561,6 +1570,7 @@
 				0027BE5E2327300400049B61 /* RegistLoginView.m in Sources */,
 				001EE80F2331ED6A009FCC11 /* CustomHeadView.m in Sources */,
 				009A3200230F9B1700515B4B /* ChangePasswordViewController.m in Sources */,
+				005D1D2F235343BF0018A8AF /* AdvertisingViewController.m in Sources */,
 				009A3195230F9B1100515B4B /* HDLNavagationViewController.m in Sources */,
 				005F4E352314DE8C00F4B002 /* AdvertistingViewController.m in Sources */,
 				0027BE7823288A5400049B61 /* MerchantUserView.m in Sources */,

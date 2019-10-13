@@ -68,11 +68,36 @@
 }
 -(void)userLoging
 {
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.LoginPage.photoTextField.text,@"phone" ,self.LoginPage.photoCodeTextField.text,@"password",nil];
-    [_manager POST:@"?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
-    }];
+    if (_LoginPage.photoCodeTextField.text.length == 0) {
+        UIAlertController *alter = [UIAlertController alertCancelWithTitle:@"温馨提示" andMessage:@"验证码不能为空" andCancelInfo:@"确定"];
+        [self presentViewController:alter animated:YES completion:nil];
+    }
+    else
+    {
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.LoginPage.photoTextField.text,@"phone" ,self.LoginPage.photoCodeTextField.text,@"password",nil];
+        [_manager POST:@"?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"%@",responseObject);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
+    }
+}
+//获取验证码
+-(void)getSendMessage
+{
+    if ([CheckCode validateMobile:_LoginPage.photoTextField.text postUIViewController:self]) {
+        [_LoginPage timeFailBeginFrom:60];
+        NSDictionary *dic = @{
+                              @"mobile":self.LoginPage.photoTextField.text
+                              };
+        [self.manager POST:@"send/sendSms?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            if ([responseObject[@"status"] boolValue]== true) {
+                NSLog(@"发送成功");
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
+    }
 }
 @end

@@ -1,8 +1,8 @@
 //
-//  ModifyPhoneViewController.h
-//  yuYue
+//  AdvertisingViewController.h
+//  yuyue
 //
-//  Created by edz on 2019/8/13.
+//  Created by edz on 2019/10/13.
 //  Copyright © 2019 edz. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ModifyPhoneViewController : UIViewController
+@interface AdvertisingViewController : UIViewController
 
 @end
 

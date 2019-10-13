@@ -19,6 +19,7 @@
 @property(nonatomic,strong) NSArray  *inputArray;
 @property(nonatomic,strong) NSIndexPath  *indexPath;
 @property(nonatomic,strong) NSMutableDictionary  *dic;
+@property(nonatomic,strong) AddressBouncedView  * addressView;
 @end
 
 @implementation PerformanceTableViewController
@@ -50,6 +51,17 @@
         make.right.equalTo(-15);
         make.height.equalTo(45);
     }];
+    _addressView = [[AddressBouncedView alloc] init];
+    _addressView.backgroundColor = RGBA(102, 102, 102, 1);
+    [self.view addSubview:_addressView];
+    [_addressView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(156);
+        make.height.equalTo(190);
+        make.left.equalTo(50);
+        make.right.equalTo(-50);
+    }];
+    [_addressView.detailField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
+    _addressView.hidden = YES;
     _dic = [[NSMutableDictionary alloc] init];
 }
 -(void)commit

@@ -193,8 +193,11 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
-    if([_model.userStatus isEqualToString:@"10B"] || [_model.userStatus isEqualToString:@"10C"] || [_model.userStatus isEqualToString:@"10D"])
+    NSLog(@"%@",_model.userType);
+    if ([_model.userType isEqualToString:@""]||_model.userType.length == 0) {
+        [self logout];
+    }
+   else
     {
         switch (indexPath.row) {
             case 0:
@@ -204,16 +207,13 @@
             }
                 break;
             case 1:
-            {
-                if ([_model.userStatus isEqualToString:@"10C"] || [_model.userStatus isEqualToString:@"10B"]) {
+//                if ([_model.userStatus isEqualToString:@"10C"] || [_model.userStatus isEqualToString:@"10B"])
+                {
                     AdvertistingViewController *adverVC = [[ AdvertistingViewController alloc] init];
                     [self.navigationController pushViewController:adverVC animated:YES];
+                
                 }
-                else
-                {
-                    
-                }
-            }
+            
                 break;
             case 2:
             {
@@ -237,13 +237,8 @@
                 break;
         }
     }
-    else
-    {
-        [self logout];
-    }
-    
-}
 
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     int index = [[[NSUserDefaults standardUserDefaults] valueForKey:@"userType"] intValue] ;
