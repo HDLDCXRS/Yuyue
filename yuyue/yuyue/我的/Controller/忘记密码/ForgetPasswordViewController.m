@@ -74,12 +74,12 @@
     }
     else
     {
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.LoginPage.photoTextField.text,@"phone" ,self.LoginPage.photoCodeTextField.text,@"password",nil];
-        [_manager POST:@"?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSLog(@"%@",responseObject);
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"%@",error);
-        }];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.LoginPage.photoTextField.text,@"phone" ,self.LoginPage.photoCodeTextField.text,@"password",nil];
+    [_manager POST:@"?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
     }
 }
 //获取验证码

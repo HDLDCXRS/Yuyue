@@ -16,15 +16,10 @@
 #import "DiverSceneViewController.h"
 #import "SpeedView.h"
 #import "CustomHeadView.h"
-//视频
-#import <ZFPlayer/ZFAVPlayerManager.h>
-#import <ZFPlayer/ZFPlayerControlView.h>
-#import <ZFPlayer/KSMediaPlayerManager.h>
-#import "ZFPlayerDetailViewController.h"
-#import "VideoTableViewCell.h"
-#import "HDLTableData.h"
+#import "ZFCustomControlViewViewController.h"//视频详情播放
+#import "VideoCell.h"
 static NSString *kIdentifier = @"kIdentifier";
-@interface FirstPageViewController ()<GYZChooseCityDelegate,UITableViewDelegate,UITableViewDataSource,VideoTableViewCellDelegate>
+@interface FirstPageViewController ()<GYZChooseCityDelegate,UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UIButton  * locationBtn;
 @property(nonatomic,strong) UILabel  * loactionLabel;
 @property(nonatomic,assign)  CGSize btnImageSize;
@@ -32,10 +27,9 @@ static NSString *kIdentifier = @"kIdentifier";
 @property(nonatomic,strong) NSMutableArray  * shuffingAry;
 @property(nonatomic,strong) CustomHeadView  *headView;
 @property(nonatomic,strong) UITableView  *tableView;
-@property (nonatomic, strong) ZFPlayerController *player;
-@property (nonatomic, strong) ZFPlayerControlView *controlView;
-@property (nonatomic, strong) NSMutableArray *dataSource;
-@property (nonatomic, strong) NSMutableArray *urls;
+@property (nonatomic, strong) NSMutableArray *videoArr;
+@property(nonatomic,assign) NSInteger  page;
+
 @end
 @implementation FirstPageViewController
 -(AFHTTPSessionManager *)manager
@@ -49,36 +43,8 @@ static NSString *kIdentifier = @"kIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loactionView];
-    [self requestData];
-
-    ZFAVPlayerManager *playerManager = [[ZFAVPlayerManager alloc] init];
-  
+   
     
-    /// player的tag值必须在cell里设置
-    self.player = [ZFPlayerController playerWithScrollView:self.tableView playerManager:playerManager containerViewTag:100];
-    self.player.controlView = self.controlView;
-    self.player.assetURLs = self.urls;
-    self.player.shouldAutoPlay = NO; //设置是否自动播放
-    /// 1.0是完全消失的时候
-    self.player.playerDisapperaPercent = 1.0; //当前播放器滚动超出屏幕 消失
-    
-    @weakify(self) //orientationWillChange 当方向改变的时候
-    self.player.orientationWillChange = ^(ZFPlayerController * _Nonnull player, BOOL isFullScreen) {
-        @strongify(self)
-        [self setNeedsStatusBarAppearanceUpdate]; //让动画一起改变
-        [UIViewController attemptRotationToDeviceOrientation]; //当前接口方向与设备部匹配可能发生旋转
-        self.tableView.scrollsToTop = !isFullScreen;
-    };
-    
-    self.player.playerDidToEnd = ^(id  _Nonnull asset) {
-        @strongify(self)
-        //        if (self.player.playingIndexPath.row < self.urls.count - 1 && !self.player.isFullScreen) {
-        //            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.player.playingIndexPath.row+1 inSection:0];
-        //            [self playTheVideoAtIndexPath:indexPath scrollToTop:YES];
-        //        } else if (self.player.isFullScreen) {
-        [self.player stopCurrentPlayingCell];
-        //        }
-    };
 }
 -(void)loactionView
 {
@@ -90,7 +56,7 @@ static NSString *kIdentifier = @"kIdentifier";
         make.height.equalTo(SCREENHEIGHT-Status_Height-TabBar_Height);
     }];
     [_tableView layoutIfNeeded];
-    [_tableView registerClass:[VideoTableViewCell class] forCellReuseIdentifier:kIdentifier];
+    [_tableView registerClass:[VideoCell class] forCellReuseIdentifier:kIdentifier];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     if (@available(iOS 11.0, *)) {
@@ -162,21 +128,25 @@ static NSString *kIdentifier = @"kIdentifier";
         }
    };
    
-    // 设置回调（一旦进入刷新状态，就调用 target 的 action，也就是调用 self 的 loadNewData 方法）
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(LoadData)];
+    // 设置文字
+    [header setTitle:@"正在刷新" forState:MJRefreshStateIdle];
+    [header setTitle:@"正在刷新" forState:MJRefreshStatePulling];
+    [header setTitle:@"服务器正在狂奔 ..." forState:MJRefreshStateRefreshing];
     // 马上进入刷新状态
+    [header beginRefreshing];
+    // 设置刷新控件
+    self.tableView.mj_header = header;
+    
     [self.tableView.mj_header beginRefreshing];
-    
-}
--(void)loadNewData
-{
-//    [UIView animateWithDuration:5 animations:^{
-//        [self.tableView.mj_header endRefreshing];
-//    }];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.tableView.mj_header endRefreshing];
-    });
-    
+    MJRefreshAutoStateFooter *footer = [MJRefreshAutoStateFooter footerWithRefreshingBlock:^{
+        [self.tableView.mj_footer beginRefreshing];
+        [self LoadMoreData];
+    }];
+    [footer setTitle:@"我是有底线的" forState:MJRefreshStateIdle];
+    [footer setTitle:@"我是有底的" forState:MJRefreshStatePulling];
+    [footer setTitle:@"服务器正在狂奔 ..." forState:MJRefreshStateRefreshing];
+    self.tableView.mj_footer = footer;
 }
 -(void)requireData
 {
@@ -225,153 +195,86 @@ static NSString *kIdentifier = @"kIdentifier";
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
 }
-- (void)requestData {
-    self.urls = @[].mutableCopy;
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"json"];
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    NSDictionary *rootDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-    
-    self.dataSource = @[].mutableCopy;
-    NSArray *videoList = [rootDict objectForKey:@"list"];
-    for (NSDictionary *dataDic in videoList) {
-        HDLTableData *data = [[HDLTableData alloc] init];
-        [data setValuesForKeysWithDictionary:dataDic];
-        HDLTableViewCellLayout *layout = [[HDLTableViewCellLayout alloc] initWithData:data];
-        [self.dataSource addObject:layout];
-        NSString *URLString = [data.video_url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-        NSURL *url = [NSURL URLWithString:URLString];
-        [self.urls addObject:url];
+#pragma mark  tableViewDelegate  datasource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _videoArr.count;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *iden = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
+    VideoCell *cell = [tableView dequeueReusableCellWithIdentifier:iden];
+    if (!cell) {
+        cell = [[VideoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:iden];
+        
     }
-}
-
-- (BOOL)shouldAutorotate {
-    /// 如果只是支持iOS9+ 那直接return NO即可，这里为了适配iOS8
-    return self.player.shouldAutorotate;
-}
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    if (self.player.isFullScreen && self.player.orientationObserver.fullScreenMode == ZFFullScreenModeLandscape) {
-        return UIInterfaceOrientationMaskLandscape;
-    }
-    return UIInterfaceOrientationMaskPortrait;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    if (self.player.isFullScreen) {
-        return UIStatusBarStyleLightContent;
-    }
-    return UIStatusBarStyleDefault;
-}
-
-- (BOOL)prefersStatusBarHidden {
-    return self.player.isStatusBarHidden; //隐藏状态栏
-}
-
-- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
-    return UIStatusBarAnimationSlide;
-}
-
-#pragma mark - UIScrollViewDelegate 列表播放必须实现
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    [scrollView zf_scrollViewDidEndDecelerating];
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    [scrollView zf_scrollViewDidEndDraggingWillDecelerate:decelerate];
-}
-
-- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
-    [scrollView zf_scrollViewDidScrollToTop];
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [scrollView zf_scrollViewDidScroll];
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [scrollView zf_scrollViewWillBeginDragging];
-}
-
-#pragma mark - UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataSource.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    VideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kIdentifier];
+    cell.bgcModel = _videoArr[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [cell setDelegate:self withIndexPath:indexPath];
-    cell.layout = self.dataSource[indexPath.row];
-    [cell setNormalMode];
     return cell;
 }
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    /// 如果正在播放的index和当前点击的index不同，则停止当前播放的index
-    if (self.player.playingIndexPath != indexPath) {
-        [self.player stopCurrentPlayingCell];
-    }
-    /// 如果没有播放，则点击进详情页会自动播放
-    if (!self.player.currentPlayerManager.isPlaying) {
-        [self playTheVideoAtIndexPath:indexPath scrollToTop:NO];
-    }
-    /// 到详情页
-    ZFPlayerDetailViewController *detailVC = [ZFPlayerDetailViewController new];
-    detailVC.player = self.player;
-    @weakify(self)
-    /// 详情页返回的回调
-    detailVC.detailVCPopCallback = ^{
-        @strongify(self)
-        if (self.player.currentPlayerManager.playState == ZFPlayerPlayStatePlayStopped) {
-            [self.player stopCurrentPlayingCell];
-        } else {
-            [self.player addPlayerViewToCell];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 221;
+}
+////获取数据
+-(void)LoadData
+{
+    self.page=1;
+    [self.videoArr removeAllObjects];
+    NSDictionary *dic = @{
+                          @"page":[NSString stringWithFormat:@"%ld",(long)self.page]
+                          };
+    typeof(self) weakSelf = self;
+    [self.manager POST:@"homePage/getVideoToHomePage" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        if ([responseObject[@"status"] boolValue] == true) {
+            //NSMutableArray * arr = [[NSMutableArray alloc] init];
+            weakSelf.videoArr = (NSMutableArray *)[NSArray yy_modelArrayWithClass:[VideoModel class] json:responseObject[@"result"]];
+            self.page = self.page +1;
+            [weakSelf.tableView.mj_header endRefreshing];
         }
-    };
-    /// 详情页点击播放的回调
-    detailVC.detailVCPlayCallback = ^{
-        @strongify(self)
-        [self hdl_playTheVideoAtIndexPath:indexPath];
-    };
-    [self.navigationController pushViewController:detailVC animated:YES];
+        [weakSelf.tableView reloadData];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [weakSelf.tableView.mj_footer endRefreshing];
+        [weakSelf.tableView.mj_header endRefreshing];
+    }];
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    HDLTableViewCellLayout *layout = self.dataSource[indexPath.row];
-    return layout.height;
+////加载更多
+-(void)LoadMoreData
+{
+    NSDictionary *dic = @{
+                          @"page":[NSString stringWithFormat:@"%ld",(long)self.page],
+                          };
+    typeof(self) weakSelf = self;
+    NSLog(@"%ld",(long)self.page);
+    [self.manager POST:@"homePage/getVideoToHomePage?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if ([responseObject[@"status"] boolValue] == true) {
+            NSMutableArray *mustArr = (NSMutableArray *)[NSArray yy_modelArrayWithClass:[VideoModel class] json:responseObject[@"result"]];
+            if (mustArr.count == 0) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [weakSelf.tableView.mj_footer endRefreshing];
+                });
+            }
+            else
+            {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [weakSelf.videoArr addObjectsFromArray:mustArr];
+                    [weakSelf.tableView reloadData];
+                    [weakSelf.tableView.mj_footer endRefreshing];
+                    self.page = self.page+1;
+                });
+            }
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [weakSelf.tableView.mj_footer endRefreshing];
+        [weakSelf.tableView.mj_header endRefreshing];
+    }];
+    
 }
-
-#pragma mark - ZFTableViewCellDelegate
-
-- (void)hdl_playTheVideoAtIndexPath:(NSIndexPath *)indexPath {
-    [self playTheVideoAtIndexPath:indexPath scrollToTop:NO];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ZFCustomControlViewViewController *vc = [[ZFCustomControlViewViewController alloc] init];
+    vc.model = _videoArr[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
 }
-
-#pragma mark - private method
-
-/// play the video
-- (void)playTheVideoAtIndexPath:(NSIndexPath *)indexPath scrollToTop:(BOOL)scrollToTop {
-    [self.player playTheIndexPath:indexPath scrollToTop:scrollToTop];
-    HDLTableViewCellLayout *layout = self.dataSource[indexPath.row];
-    [self.controlView showTitle:nil
-                 coverURLString:layout.data.thumbnail_url
-                 fullScreenMode:layout.isVerticalVideo?ZFFullScreenModePortrait:ZFFullScreenModeLandscape];
-}
-
-#pragma mark - getter
-- (ZFPlayerControlView *)controlView {
-    if (!_controlView) {
-        _controlView = [ZFPlayerControlView new];
-        _controlView.prepareShowLoading = YES;
-    }
-    return _controlView;
-}
-//- (void)viewDidLoad {
-//    [super viewDidLoad];
-//
-//}
-
-
 @end

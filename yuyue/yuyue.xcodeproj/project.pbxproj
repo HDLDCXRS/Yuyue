@@ -30,15 +30,11 @@
 		0024EC362320A8D7001A6BC6 /* CityData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0024EC352320A8D7001A6BC6 /* CityData.plist */; };
 		0024EC582321F4DD001A6BC6 /* RealNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0024EC572321F4DD001A6BC6 /* RealNameView.m */; };
 		0024EF1F2325D904001A6BC6 /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0024EC852325D900001A6BC6 /* VideoViewController.m */; };
-		0024EFCF2325DAFE001A6BC6 /* HDLTableViewCellLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0024EFC92325DAFD001A6BC6 /* HDLTableViewCellLayout.m */; };
-		0024EFD02325DAFE001A6BC6 /* VideoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0024EFCB2325DAFE001A6BC6 /* VideoTableViewCell.m */; };
-		0024EFD22325DAFE001A6BC6 /* ZFPlayerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0024EFCE2325DAFE001A6BC6 /* ZFPlayerDetailViewController.m */; };
 		0024EFD52325F802001A6BC6 /* RealNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0024EFD42325F802001A6BC6 /* RealNameViewController.m */; };
 		0024EFD82326158C001A6BC6 /* CheckCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0024EFD72326158C001A6BC6 /* CheckCode.m */; };
 		0024EFDC2326409B001A6BC6 /* PassRealNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0024EFDB2326409B001A6BC6 /* PassRealNameViewController.m */; };
 		0024EFDF2326464B001A6BC6 /* PassRealNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0024EFDE2326464B001A6BC6 /* PassRealNameView.m */; };
 		0024EFE223264770001A6BC6 /* CommonLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0024EFE123264770001A6BC6 /* CommonLabel.m */; };
-		0024EFE423265525001A6BC6 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 0024EFE323265525001A6BC6 /* data.json */; };
 		0025C56E2318C7070079DF4E /* PublisVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0025C56D2318C7070079DF4E /* PublisVideoViewController.m */; };
 		0025C5712318C75B0079DF4E /* PublisVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0025C5702318C75B0079DF4E /* PublisVideoView.m */; };
 		0025C577231CAA150079DF4E /* PublisjTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0025C576231CAA150079DF4E /* PublisjTableViewCell.m */; };
@@ -112,7 +108,6 @@
 		005D1D212352F4F90018A8AF /* GetAllCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 005D1D202352F4F90018A8AF /* GetAllCommentModel.m */; };
 		005D1D29235323AE0018A8AF /* ProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005D1D28235323AE0018A8AF /* ProtocolViewController.m */; };
 		005D1D2B235325950018A8AF /* Protocalpolist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005D1D2A235325950018A8AF /* Protocalpolist.plist */; };
-		005D1D2F235343BF0018A8AF /* AdvertisingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005D1D2E235343BF0018A8AF /* AdvertisingViewController.m */; };
 		005F4E342314DE8C00F4B002 /* BusinessLicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F4E2E2314DE8C00F4B002 /* BusinessLicenseViewController.m */; };
 		005F4E352314DE8C00F4B002 /* AdvertistingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F4E2F2314DE8C00F4B002 /* AdvertistingViewController.m */; };
 		005F4E362314DE8C00F4B002 /* UploadIdCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F4E312314DE8C00F4B002 /* UploadIdCardViewController.m */; };
@@ -120,7 +115,6 @@
 		00620B8C2316116600178559 /* HBK_ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00620B8A2316116500178559 /* HBK_ScanViewController.m */; };
 		006AF1AE2339D1CF004DDBC5 /* MinePublishModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 006AF1AD2339D1CF004DDBC5 /* MinePublishModel.m */; };
 		006AF1B12339E677004DDBC5 /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 006AF1B02339E677004DDBC5 /* NoDataView.m */; };
-		006AF1B62339FCE0004DDBC5 /* HDLTableData.m in Sources */ = {isa = PBXBuildFile; fileRef = 006AF1B52339FCE0004DDBC5 /* HDLTableData.m */; };
 		006AF1BC2339FDFE004DDBC5 /* MyCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 006AF1BB2339FDFD004DDBC5 /* MyCommentViewController.m */; };
 		006AF1BF2339FFB1004DDBC5 /* MyCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 006AF1BE2339FFB1004DDBC5 /* MyCommentModel.m */; };
 		006AF1C2233A09FE004DDBC5 /* MyCommontView.m in Sources */ = {isa = PBXBuildFile; fileRef = 006AF1C1233A09FE004DDBC5 /* MyCommontView.m */; };
@@ -214,12 +208,6 @@
 		0024EC572321F4DD001A6BC6 /* RealNameView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RealNameView.m; sourceTree = "<group>"; };
 		0024EC852325D900001A6BC6 /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
 		0024EC882325D900001A6BC6 /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
-		0024EFC72325DAFD001A6BC6 /* VideoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoTableViewCell.h; sourceTree = "<group>"; };
-		0024EFC92325DAFD001A6BC6 /* HDLTableViewCellLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDLTableViewCellLayout.m; sourceTree = "<group>"; };
-		0024EFCA2325DAFE001A6BC6 /* ZFPlayerDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPlayerDetailViewController.h; sourceTree = "<group>"; };
-		0024EFCB2325DAFE001A6BC6 /* VideoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoTableViewCell.m; sourceTree = "<group>"; };
-		0024EFCC2325DAFE001A6BC6 /* HDLTableViewCellLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDLTableViewCellLayout.h; sourceTree = "<group>"; };
-		0024EFCE2325DAFE001A6BC6 /* ZFPlayerDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPlayerDetailViewController.m; sourceTree = "<group>"; };
 		0024EFD32325F802001A6BC6 /* RealNameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RealNameViewController.h; sourceTree = "<group>"; };
 		0024EFD42325F802001A6BC6 /* RealNameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RealNameViewController.m; sourceTree = "<group>"; };
 		0024EFD62326158C001A6BC6 /* CheckCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckCode.h; sourceTree = "<group>"; };
@@ -230,7 +218,6 @@
 		0024EFDE2326464B001A6BC6 /* PassRealNameView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PassRealNameView.m; sourceTree = "<group>"; };
 		0024EFE023264770001A6BC6 /* CommonLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonLabel.h; sourceTree = "<group>"; };
 		0024EFE123264770001A6BC6 /* CommonLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonLabel.m; sourceTree = "<group>"; };
-		0024EFE323265525001A6BC6 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		0025C56C2318C7070079DF4E /* PublisVideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublisVideoViewController.h; sourceTree = "<group>"; };
 		0025C56D2318C7070079DF4E /* PublisVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublisVideoViewController.m; sourceTree = "<group>"; };
 		0025C56F2318C75B0079DF4E /* PublisVideoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublisVideoView.h; sourceTree = "<group>"; };
@@ -377,8 +364,6 @@
 		006AF1AD2339D1CF004DDBC5 /* MinePublishModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MinePublishModel.m; sourceTree = "<group>"; };
 		006AF1AF2339E677004DDBC5 /* NoDataView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoDataView.h; sourceTree = "<group>"; };
 		006AF1B02339E677004DDBC5 /* NoDataView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoDataView.m; sourceTree = "<group>"; };
-		006AF1B52339FCE0004DDBC5 /* HDLTableData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDLTableData.m; sourceTree = "<group>"; };
-		006AF1B72339FCFC004DDBC5 /* HDLTableData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDLTableData.h; sourceTree = "<group>"; };
 		006AF1BA2339FDFD004DDBC5 /* MyCommentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCommentViewController.h; sourceTree = "<group>"; };
 		006AF1BB2339FDFD004DDBC5 /* MyCommentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCommentViewController.m; sourceTree = "<group>"; };
 		006AF1BD2339FFB1004DDBC5 /* MyCommentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCommentModel.h; sourceTree = "<group>"; };
@@ -580,22 +565,6 @@
 				0024EC2E2320A68D001A6BC6 /* GYZCityHeaderView.m */,
 			);
 			path = "位置";
-			sourceTree = "<group>";
-		};
-		0024EC3E2320F0F9001A6BC6 /* 视频测试 */ = {
-			isa = PBXGroup;
-			children = (
-				0024EFE323265525001A6BC6 /* data.json */,
-				006AF1B72339FCFC004DDBC5 /* HDLTableData.h */,
-				006AF1B52339FCE0004DDBC5 /* HDLTableData.m */,
-				0024EFCC2325DAFE001A6BC6 /* HDLTableViewCellLayout.h */,
-				0024EFC92325DAFD001A6BC6 /* HDLTableViewCellLayout.m */,
-				0024EFC72325DAFD001A6BC6 /* VideoTableViewCell.h */,
-				0024EFCB2325DAFE001A6BC6 /* VideoTableViewCell.m */,
-				0024EFCA2325DAFE001A6BC6 /* ZFPlayerDetailViewController.h */,
-				0024EFCE2325DAFE001A6BC6 /* ZFPlayerDetailViewController.m */,
-			);
-			path = "视频测试";
 			sourceTree = "<group>";
 		};
 		0024EC522321F452001A6BC6 /* 实名认证 */ = {
@@ -1067,7 +1036,6 @@
 				002C8222234C25E900D0D718 /* AppUserModel.m */,
 				002C8224234C266700D0D718 /* VideoModel.h */,
 				002C8225234C266700D0D718 /* VideoModel.m */,
-				0024EC3E2320F0F9001A6BC6 /* 视频测试 */,
 				009A3174230F9AF500515B4B /* Controller */,
 				002C822B234D813400D0D718 /* DetailVideoViewController.h */,
 				002C822C234D813400D0D718 /* DetailVideoViewController.m */,
@@ -1436,7 +1404,6 @@
 				002C9B1F23389D26007A2798 /* city.json in Resources */,
 				00391081231E827B004C64C7 /* AboutOurViewController.xib in Resources */,
 				0028B64E233F619A0067E1EF /* SexPickerTool.xib in Resources */,
-				0024EFE423265525001A6BC6 /* data.json in Resources */,
 				0028B611233F06AD0067E1EF /* read_me.txt in Resources */,
 				0024EC362320A8D7001A6BC6 /* CityData.plist in Resources */,
 			);
@@ -1494,7 +1461,6 @@
 				0025C56E2318C7070079DF4E /* PublisVideoViewController.m in Sources */,
 				009A3190230F9B1100515B4B /* UILabel+CHYLabelCategory.m in Sources */,
 				00327CDF232F945D006D249D /* GiftViewController.m in Sources */,
-				006AF1B62339FCE0004DDBC5 /* HDLTableData.m in Sources */,
 				002C9B0C23386667007A2798 /* ShowSiteModel.m in Sources */,
 				002C8226234C266700D0D718 /* VideoModel.m in Sources */,
 				002C9B1E23389D26007A2798 /* CityModel.m in Sources */,
@@ -1514,7 +1480,6 @@
 				009A318F230F9B1100515B4B /* UIImageView+CHYImageViewCategory.m in Sources */,
 				00FF2748231649A600E0E9CC /* FeedSuccessViewController.m in Sources */,
 				0024EC332320A68D001A6BC6 /* GYZCity.m in Sources */,
-				0024EFCF2325DAFE001A6BC6 /* HDLTableViewCellLayout.m in Sources */,
 				009A31F5230F9B1700515B4B /* SetUpTableViewController.m in Sources */,
 				0024EFE223264770001A6BC6 /* CommonLabel.m in Sources */,
 				0027BE702328824E00049B61 /* ArtUserView.m in Sources */,
@@ -1565,7 +1530,6 @@
 				002C70F32350560800767615 /* HostStyleView.m in Sources */,
 				00391075231DFFDD004C64C7 /* LoginModel.m in Sources */,
 				006AF1C5233AF967004DDBC5 /* LYYTextView.m in Sources */,
-				0024EFD02325DAFE001A6BC6 /* VideoTableViewCell.m in Sources */,
 				0024386F232CAAD500827E31 /* DiverSceneModel.m in Sources */,
 				0027BE5E2327300400049B61 /* RegistLoginView.m in Sources */,
 				001EE80F2331ED6A009FCC11 /* CustomHeadView.m in Sources */,
@@ -1588,7 +1552,6 @@
 				002C9B1223389D1D007A2798 /* ShowPickerView.m in Sources */,
 				002C9B272338C413007A2798 /* FocusCollectionCell.m in Sources */,
 				0024EFD82326158C001A6BC6 /* CheckCode.m in Sources */,
-				0024EFD22325DAFE001A6BC6 /* ZFPlayerDetailViewController.m in Sources */,
 				002C70E923500BFA00767615 /* ZFCustomControlViewViewController.m in Sources */,
 				006AF1BC2339FDFE004DDBC5 /* MyCommentViewController.m in Sources */,
 				00243873232D297A00827E31 /* DetailSceneTableViewController.m in Sources */,

@@ -90,15 +90,41 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.tableFooterView = [UIView new];
-    _page = 1;
-     [self SearchLoadData];
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(SearchLoadData)];
+ 
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(LoadData)];
+    // 设置文字
+    [header setTitle:@"正在刷新" forState:MJRefreshStateIdle];
+    [header setTitle:@"正在刷新" forState:MJRefreshStatePulling];
+    [header setTitle:@"服务器正在狂奔 ..." forState:MJRefreshStateRefreshing];
+    // 马上进入刷新状态
+    [header beginRefreshing];
+    // 设置刷新控件
+    self.tableView.mj_header = header;
+    
     [self.tableView.mj_header beginRefreshing];
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(LoadMoreData)];
-    [self.tableView.mj_footer beginRefreshing];
+    MJRefreshAutoStateFooter *footer = [MJRefreshAutoStateFooter footerWithRefreshingBlock:^{
+        [self.tableView.mj_footer beginRefreshing];
+        [self LoadMoreData];
+    }];
+    [footer setTitle:@"我是有底线的" forState:MJRefreshStateIdle];
+    [footer setTitle:@"我是有底的" forState:MJRefreshStatePulling];
+    [footer setTitle:@"服务器正在狂奔 ..." forState:MJRefreshStateRefreshing];
+    //     [header setTitle:@"我是有底线的" forState:MJRefreshStateIdle];
+    self.tableView.mj_footer = footer;
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectZero];
+    [btn setImage:[UIImage imageNamed:@"回到顶部"] forState:UIControlStateNormal];
+    CGSize size = btn.currentImage.size;
+    [self.view addSubview:btn];
+    [btn makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.offset(-TabBar_Height-69);
+        make.right.equalTo(-19);
+        make.size.equalTo(CGSizeMake(size.width, size.height));
+    }];
+    [btn addTarget:self action:@selector(toTopViewMethod) forControlEvents:UIControlEventTouchUpInside];
    
     
 }
+
 #pragma mark  tableViewDelegate  datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -107,13 +133,12 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *iden = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
+    NSString *iden = @"cell";
     VideoCell *cell = [tableView dequeueReusableCellWithIdentifier:iden];
     if (!cell) {
         cell = [[VideoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:iden];
-        cell.bgcModel = _videoArr[indexPath.row];
-
     }
+     cell.bgcModel = _videoArr[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
