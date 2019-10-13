@@ -33,6 +33,7 @@
 @property(nonatomic,strong) UIScrollView  *scrollView;
 @property(nonatomic,strong) AFHTTPSessionManager  *manager;
 @property(nonatomic,strong) UIRefreshControl  *refreshControl;
+@property(nonatomic,strong) LoginModel *model ;
 
 @end
 
@@ -49,15 +50,7 @@
     }
     return _manager;
 }
-//- (UIRefreshControl *)refreshControl
-//{
-//    if (!_refreshControl) {
-//        _refreshControl = [[UIRefreshControl alloc] init];
-//        _refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉刷新"];
-//        [_refreshControl addTarget:self action:@selector(loadData) forControlEvents:UIControlEventValueChanged];
-//    }
-//    return _refreshControl;
-//}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     _scrollView = [[UIScrollView alloc] init];
@@ -200,40 +193,55 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.row) {
-        case 0:
-        {
-            MyCommentViewController *vc = [[MyCommentViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+   
+    if([_model.userStatus isEqualToString:@"10B"] || [_model.userStatus isEqualToString:@"10C"] || [_model.userStatus isEqualToString:@"10D"])
+    {
+        switch (indexPath.row) {
+            case 0:
+            {
+                MyCommentViewController *vc = [[MyCommentViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            case 1:
+            {
+                if ([_model.userStatus isEqualToString:@"10C"] || [_model.userStatus isEqualToString:@"10B"]) {
+                    AdvertistingViewController *adverVC = [[ AdvertistingViewController alloc] init];
+                    [self.navigationController pushViewController:adverVC animated:YES];
+                }
+                else
+                {
+                    
+                }
+            }
+                break;
+            case 2:
+            {
+                PerformanceTableViewController *perFormanceVC = [[PerformanceTableViewController alloc] init];
+                [self.navigationController pushViewController:perFormanceVC animated:YES];
+            }
+                break;
+            case 3:
+            {
+                FeedBackViewController *vc = [[FeedBackViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            case 4:
+            {
+                AboutOurViewController *vc = [[AboutOurViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            default:
+                break;
         }
-            break;
-        case 1:
-        {
-            AdvertistingViewController *adverVC = [[ AdvertistingViewController alloc] init];
-             [self.navigationController pushViewController:adverVC animated:YES];
-        }
-            break;
-        case 2:
-        {
-            PerformanceTableViewController *perFormanceVC = [[PerformanceTableViewController alloc] init];
-            [self.navigationController pushViewController:perFormanceVC animated:YES];
-        }
-            break;
-        case 3:
-        {
-            FeedBackViewController *vc = [[FeedBackViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 4:
-        {
-            AboutOurViewController *vc = [[AboutOurViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        default:
-            break;
     }
+    else
+    {
+        [self logout];
+    }
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -250,13 +258,29 @@
 {
     self.navigationController.navigationBarHidden = NO;
 }
-
+- (void) logout {
+    // 初始化对话框
+    typeof(self) weakSelf = self;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请先登录" preferredStyle:UIAlertControllerStyleAlert];
+    // 确定注销
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *_Nonnull action) {
+        MainLoginViewController *vc = [[MainLoginViewController alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    UIAlertAction *cancelAction =[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alert addAction:okAction];
+    [alert addAction:cancelAction];
+    // 弹出对话框
+    [self presentViewController:alert animated:true completion:nil];
+}
 - (void)headRefresh{
     if ([[NSUserDefaults standardUserDefaults] valueForKey:@"userType"] ) {
         typeof(self) weakSelf =self;
         [self.manager POST:@"login/getMessage" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             if ([responseObject[@"message"] isEqualToString:@"获取成功！"]) {
                 LoginModel *model = [LoginModel yy_modelWithDictionary:responseObject[@"result"]];
+                weakSelf.model = model;
                  [weakSelf.mine setModel:model];
                
                

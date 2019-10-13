@@ -31,8 +31,7 @@
         _manager.responseSerializer = [AFJSONResponseSerializer serializer];
         _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/javascript",@"text/html",@"text/plain",nil];
         _manager.requestSerializer=[AFHTTPRequestSerializer serializer];
-        //
-        // [_manager.requestSerializer setValue: [NSString stringWithFormat:@"%@", TOKEN] forHTTPHeaderField:@"token"];
+
     }
     return _manager;
 }
@@ -85,7 +84,7 @@
     _loginView.clickBlock = ^(NSInteger index) {
         switch (index) {
             case 0:
-                [weakSelf.loginView timeFailBeginFrom:60];
+                [weakSelf getSendMessage];
                 break;
             case 1:
                 [weakSelf codeLoging];
@@ -112,7 +111,6 @@
                 ForgetPasswordViewController *vc = [[ForgetPasswordViewController alloc]init];
                 [weakSelf.navigationController pushViewController:vc animated:YES];
             }
-                
                 break;
             case 1:
                 [weakSelf passwordLoging];
@@ -208,7 +206,7 @@
         if ([responseObject[@"message"] isEqualToString:@"登录成功！"]) {
             NSLog(@"%@",responseObject);
              [[NSUserDefaults standardUserDefaults] setValue:responseObject[@"token"] forKey:@"token"];
-               [[NSUserDefaults standardUserDefaults] setValue:responseObject[@"opendId"] forKey:@"opendId"];
+             [[NSUserDefaults standardUserDefaults] setValue:responseObject[@"opendId"] forKey:@"opendId"];
              [[NSUserDefaults standardUserDefaults] setValue:responseObject[@"result"][@"userType"] forKey:@"userType"];
             [[NSUserDefaults standardUserDefaults] setValue:responseObject[@"result"][@"nickName"] forKey:@"nickName"];
             [[NSUserDefaults standardUserDefaults] synchronize];
@@ -224,7 +222,6 @@
             UIAlertController *alter = [UIAlertController alertCancelWithTitle:@"友情提示" andMessage:@"密码错误" andCancelInfo:@"确定"];
             [self presentViewController:alter animated:YES completion:^{}];
         }
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
@@ -236,9 +233,7 @@
     [self.manager POST:@"login/loginByPhone" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"message"] isEqualToString:@"登录成功！"]) {
             [[NSUserDefaults standardUserDefaults] setValue:responseObject[@"token"] forKey:@"token"];
-            
             [[NSUserDefaults standardUserDefaults] setValue:responseObject[@"result"][@"userType"] forKey:@"userType"];
-            
             [[NSUserDefaults standardUserDefaults] setValue:responseObject[@"result"][@"nickName"] forKey:@"nickName"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             LoginModel *model = [LoginModel yy_modelWithDictionary:responseObject[@"result"]];
@@ -259,11 +254,19 @@
 //获取验证码
 -(void)getSendMessage
 {
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.loginView.photoTextField.text,@"phone",nil];
-    [_manager POST:@"send/sendSms" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"发送成功");
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
-    }];
+    if ([CheckCode validateMobile:_loginView.photoTextField.text postUIViewController:self]) {
+        [self.loginView timeFailBeginFrom:60];
+        NSDictionary *dic = @{
+                              @"mobile":self.loginView.photoTextField.text
+                              };
+        [self.manager POST:@"send/sendSms?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            if ([responseObject[@"status"] boolValue]== true) {
+                   NSLog(@"发送成功");
+            }
+         
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
+    }
 }
 @end

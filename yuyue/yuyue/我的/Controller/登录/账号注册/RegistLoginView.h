@@ -17,13 +17,11 @@ typedef void(^MyBlock)(NSInteger index);
 @property(nonatomic,strong) ReginstLoginstCommonView  *reginstView_three;
 @property(nonatomic,strong) ReginstLoginstCommonView  *reginstView_four;
 @property(nonatomic,copy) MyBlock  click;
-@property(nonatomic,strong) UIButton  *footerBtn;
-//
-@property(nonatomic,strong) UIButton  *iconBtn;
-@property(nonatomic,strong) UILabel  *headLabel;
-@property(nonatomic,strong) UILabel  *userLabel;
+@property(nonatomic,strong) UIButton  *footerBtn; //注册按钮
 
-
+@property(nonatomic,strong) UIButton  *iconBtn;  
+@property(nonatomic,strong) UIButton  *headLabel; //用户协议
+@property(nonatomic,strong) UIButton  *userLabel;  //隐私政策
 @property(nonatomic,strong) UILabel  *companyLabel;
 
 

@@ -9,12 +9,6 @@
 #import "RegistLoginView.h"
 #import "NSString+Size.h"
 @implementation RegistLoginView
-//@property(nonatomic,strong) UILabel  *titleLabel;
-//@property(nonatomic,strong) ReginstLoginstCommonView  *reginstView_one;
-//@property(nonatomic,strong) ReginstLoginstCommonView  *reginstView_two;
-//@property(nonatomic,strong) ReginstLoginstCommonView  *reginstView_three;
-//@property(nonatomic,strong) ReginstLoginstCommonView  *reginstView_four;
-////
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -62,6 +56,7 @@
         }];
         
         _iconBtn = [UIButton buttonWithNormalImage:@"默认" highlightedImage:@"选中" addTarget:self action:@selector(onClick:)];
+        [_iconBtn setImage:[UIImage imageNamed:@"选中"] forState:UIControlStateSelected];
         _iconBtn.tag =1;
         [self addSubview:_iconBtn];
         [_iconBtn makeConstraints:^(MASConstraintMaker *make) {
@@ -75,9 +70,10 @@
         [string addAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"PingFang SC" size: 11]} range:NSMakeRange(0, 7)];
                                              
         [string addAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"PingFang SC" size: 11], NSForegroundColorAttributeName: [UIColor colorWithRed:26/255.0 green:151/255.0 blue:224/255.0 alpha:1.0]} range:NSMakeRange(7, 4)];
-        
-        _headLabel = [[UILabel alloc] init];
-        _headLabel.attributedText = string;
+        _headLabel = [UIButton buttonWithType:UIButtonTypeCustom];
+        _headLabel.tag = 10;
+        [_headLabel addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_headLabel setAttributedTitle:string forState:UIControlStateNormal];
         [self addSubview:_headLabel];
         [_headLabel makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.reginstView_four.bottom).offset(5);
@@ -92,8 +88,11 @@
         [string2 addAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"PingFang SC" size: 11]} range:NSMakeRange(0, 1)];
         
         [string2 addAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"PingFang SC" size: 11], NSForegroundColorAttributeName: [UIColor colorWithRed:26/255.0 green:151/255.0 blue:224/255.0 alpha:1.0]} range:NSMakeRange(1, 4)];
-        _userLabel = [[UILabel alloc] init];
-        _userLabel.attributedText = string2;
+        _userLabel = [UIButton buttonWithType:UIButtonTypeCustom];;
+        [_userLabel setAttributedTitle:string2 forState:UIControlStateNormal];
+        [_userLabel addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+        _userLabel.tag = 11;
+        _userLabel.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [self addSubview:_userLabel];
         [_userLabel makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.reginstView_four.bottom).offset(5);

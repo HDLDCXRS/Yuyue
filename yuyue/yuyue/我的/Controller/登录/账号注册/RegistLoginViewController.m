@@ -9,6 +9,7 @@
 #import "RegistLoginViewController.h"
 #import "RegistLoginView.h"
 #import "CheckCode.h"
+#import "ProtocolViewController.h"
 @interface RegistLoginViewController ()<UITextFieldDelegate>
 @property(nonatomic,strong) RegistLoginView  *reginLoginView;
 @property(nonatomic,strong) AFHTTPSessionManager  *manager;
@@ -30,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    [self initNavagation];
     _reginLoginView = [[RegistLoginView alloc] init];
     [self.view addSubview:_reginLoginView];
     [_reginLoginView makeConstraints:^(MASConstraintMaker *make) {
@@ -44,19 +46,35 @@
     _reginLoginView.click = ^(NSInteger index) {
         switch (index) {
             case 1:
-                NSLog(@"%ld",(long)index);
+              weakSelf.reginLoginView.iconBtn.selected = ! weakSelf.reginLoginView.iconBtn.selected;
                 break;
             case 2:
-                [weakSelf postURL];
-                NSLog(@"%ld",(long)index);
+            {
+                if ( weakSelf.reginLoginView.iconBtn.selected == NO) {
+                    UIAlertController *alter = [UIAlertController alertCancelWithTitle:@"温馨提示" andMessage:@"您没有同意用户协议" andCancelInfo:@"确定"];
+                    [weakSelf presentViewController:alter animated:YES completion:^{}];
+                    
+                }
+                else
+                {
+                    [weakSelf postURL];
+                    NSLog(@"%ld",(long)index);
+                }
+            }
                 break;
+            case 10:
+            {
+                ProtocolViewController *vc = [[ProtocolViewController alloc] init];
+                [weakSelf presentViewController:vc animated:YES completion:nil];
+            }
                 
+                break;
             default:
                 break;
         }
     };
     _reginLoginView.reginstView_two.click = ^(UIButton * _Nonnull btn) {
-        [weakSelf.reginLoginView.reginstView_two timeFailBeginFrom:60];
+        
         [weakSelf sendSmsMethod];
     };
 }
@@ -85,6 +103,7 @@
 }
 -(void)sendSmsMethod
 {
+    [self.reginLoginView.reginstView_two timeFailBeginFrom:60];
     NSDictionary *dic = @{
                           @"mobile":_reginLoginView.reginstView_one.inputTextField.text
                           };
@@ -102,27 +121,46 @@
 }
 -(void)postURL
 {
-    NSDictionary *dic = @{
-                          @"phone":_reginLoginView.reginstView_one.inputTextField.text,
-                          @"code" :_reginLoginView.reginstView_two.inputTextField.text,
-                          @"password":_reginLoginView.reginstView_four.inputTextField.text
-                          };
-    [self.manager POST:@"login/regist?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if ([responseObject[@"message"] isEqualToString:@"注册成功！"]) {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-        else if ([responseObject[@"message"] isEqualToString:@"该号码已注册！"])
-        {
-            UIAlertController *alter = [UIAlertController alertCancelWithTitle:@"温馨提示" andMessage:@"该号码已注册" andCancelInfo:@"确定"];
-            [self presentViewController:alter animated:YES completion:nil];
-        }
-        else {
-            UIAlertController *alter = [UIAlertController alertCancelWithTitle:@"温馨提示" andMessage:@"验证码不正确" andCancelInfo:@"确定"];
-            [self presentViewController:alter animated:YES completion:nil];
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"----");
-    }];
+    if (_reginLoginView.reginstView_one.inputTextField.text.length == 0) {
+        UIAlertController *alter = [UIAlertController alertCancelWithTitle:@"温馨提示" andMessage:@"请填写手机号" andCancelInfo:@"确定" ];
+        [self presentViewController:alter animated:YES completion:nil];
+    }
+    else
+    {
+        NSDictionary *dic = @{
+                              @"phone":_reginLoginView.reginstView_one.inputTextField.text,
+                              @"code" :_reginLoginView.reginstView_two.inputTextField.text,
+                              @"password":_reginLoginView.reginstView_four.inputTextField.text
+                              };
+        [self.manager POST:@"login/regist?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            if ([responseObject[@"status"] boolValue ] ==true) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            else
+            {
+                UIAlertController *alter = [UIAlertController alertCancelWithTitle:@"温馨提示" andMessage:responseObject[@"message"] andCancelInfo:@"确定" ];
+                [self presentViewController:alter animated:YES completion:nil];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"----");
+        }];
+    }
+    
 }
-
+-(void)initNavagation
+{
+    //设置背景颜色
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    UIButton  *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(15,36, 31,15)];
+    [rightBtn setTitle:@"登录" forState:UIControlStateNormal];
+    [rightBtn setTitleColor:RGBA(51, 51, 51, 1) forState:UIControlStateNormal];
+    rightBtn.titleLabel.font = [UIFont fontWithName:@"PingFang-SC-Regular" size: 16];
+    [rightBtn addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+}
+-(void)rightBtnClick
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

@@ -58,10 +58,13 @@
     typeof(self) weakSelf =self;
     [self.manager POST:@"myController/myComments" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"message"] isEqualToString:@"返回成功"]) {
-            weakSelf.numberArray = (NSMutableArray *)[NSArray yy_modelArrayWithClass:[MyCommentModel class] json:responseObject[@"result"]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                weakSelf.numberArray = (NSMutableArray *)[NSArray yy_modelArrayWithClass:[MyCommentModel class] json:responseObject[@"result"]];
+                
+                [weakSelf.tableView reloadData];
+                [weakSelf.tableView.mj_header endRefreshing];
+            });
             
-            [weakSelf.tableView reloadData];
-            [weakSelf.tableView.mj_header endRefreshing];
             
         }
         else

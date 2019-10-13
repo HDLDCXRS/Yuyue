@@ -54,6 +54,9 @@
                 make.width.equalTo(70);
                 make.height.equalTo(13);
             }];
+            [_inputTextField updateConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(-100);
+            }];
         }
     }
     return self;

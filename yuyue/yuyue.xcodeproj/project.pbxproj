@@ -110,6 +110,8 @@
 		0044F2572316936B00498D51 /* CommonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0044F2562316936B00498D51 /* CommonView.m */; };
 		0044F25A2316956200498D51 /* PhomeNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0044F2592316956200498D51 /* PhomeNumberViewController.m */; };
 		005D1D212352F4F90018A8AF /* GetAllCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 005D1D202352F4F90018A8AF /* GetAllCommentModel.m */; };
+		005D1D29235323AE0018A8AF /* ProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005D1D28235323AE0018A8AF /* ProtocolViewController.m */; };
+		005D1D2B235325950018A8AF /* Protocalpolist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005D1D2A235325950018A8AF /* Protocalpolist.plist */; };
 		005F4E342314DE8C00F4B002 /* BusinessLicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F4E2E2314DE8C00F4B002 /* BusinessLicenseViewController.m */; };
 		005F4E352314DE8C00F4B002 /* AdvertistingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F4E2F2314DE8C00F4B002 /* AdvertistingViewController.m */; };
 		005F4E362314DE8C00F4B002 /* UploadIdCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F4E312314DE8C00F4B002 /* UploadIdCardViewController.m */; };
@@ -355,6 +357,9 @@
 		0044F2592316956200498D51 /* PhomeNumberViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhomeNumberViewController.m; sourceTree = "<group>"; };
 		005D1D1F2352F4F90018A8AF /* GetAllCommentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetAllCommentModel.h; sourceTree = "<group>"; };
 		005D1D202352F4F90018A8AF /* GetAllCommentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetAllCommentModel.m; sourceTree = "<group>"; };
+		005D1D27235323AE0018A8AF /* ProtocolViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProtocolViewController.h; sourceTree = "<group>"; };
+		005D1D28235323AE0018A8AF /* ProtocolViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProtocolViewController.m; sourceTree = "<group>"; };
+		005D1D2A235325950018A8AF /* Protocalpolist.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Protocalpolist.plist; sourceTree = "<group>"; };
 		005F4E2D2314DE8C00F4B002 /* BusinessLicenseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessLicenseViewController.h; sourceTree = "<group>"; };
 		005F4E2E2314DE8C00F4B002 /* BusinessLicenseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessLicenseViewController.m; sourceTree = "<group>"; };
 		005F4E2F2314DE8C00F4B002 /* AdvertistingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertistingViewController.m; sourceTree = "<group>"; };
@@ -901,6 +906,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		005D1D232353223F0018A8AF /* 协议跟政策 */ = {
+			isa = PBXGroup;
+			children = (
+				005D1D27235323AE0018A8AF /* ProtocolViewController.h */,
+				005D1D28235323AE0018A8AF /* ProtocolViewController.m */,
+				005D1D2A235325950018A8AF /* Protocalpolist.plist */,
+			);
+			name = "协议跟政策";
+			path = ../../../../..;
+			sourceTree = "<group>";
+		};
 		005F4E2A2314DE8C00F4B002 /* 广告推广 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1245,6 +1261,7 @@
 		009A31D5230F9B1700515B4B /* 账号注册 */ = {
 			isa = PBXGroup;
 			children = (
+				005D1D232353223F0018A8AF /* 协议跟政策 */,
 				009A31D7230F9B1700515B4B /* RegistLoginViewController.h */,
 				009A31D8230F9B1700515B4B /* RegistLoginViewController.m */,
 				0027BE5C2327300400049B61 /* RegistLoginView.h */,
@@ -1400,6 +1417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				009A322D230FB0E200515B4B /* Images.xcassets in Resources */,
+				005D1D2B235325950018A8AF /* Protocalpolist.plist in Resources */,
 				001EE81C23320336009FCC11 /* MainADCell.xib in Resources */,
 				0028B60F233F06AD0067E1EF /* README.txt in Resources */,
 				009A3163230F9A4F00515B4B /* LaunchScreen.storyboard in Resources */,
@@ -1555,6 +1573,7 @@
 				009A3222230F9B4200515B4B /* SpeedViewCell.m in Sources */,
 				0027BE612327306A00049B61 /* ReginstLoginstCommonView.m in Sources */,
 				0028B61A233F1BDF0067E1EF /* WithdrawalrecordTableViewCell.m in Sources */,
+				005D1D29235323AE0018A8AF /* ProtocolViewController.m in Sources */,
 				0024EFDC2326409B001A6BC6 /* PassRealNameViewController.m in Sources */,
 				002C9B1223389D1D007A2798 /* ShowPickerView.m in Sources */,
 				002C9B272338C413007A2798 /* FocusCollectionCell.m in Sources */,
