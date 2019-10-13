@@ -18,6 +18,8 @@
 #import "HostStyleViewController.h" //跳转爆款
 #import "CommentTableViewCell.h"
 #import "WriteCommentView.h"
+#import "GetAllCommentModel.h"
+
 @interface ZFCustomControlViewViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) ZFPlayerController *player;
 @property (nonatomic, strong) UIImageView *containerView;
@@ -27,10 +29,23 @@
 @property(nonatomic,strong) UITableView  *tableView;
 @property(nonatomic,strong) NSMutableArray  *dicArr;
 @property(nonatomic,strong) WriteCommentView  *bottomView;
+@property(nonatomic,strong) AFHTTPSessionManager  *manager;
+@property(nonatomic,assign) NSInteger  page;
 @end
 
 @implementation ZFCustomControlViewViewController
-
+-(AFHTTPSessionManager*)manager
+{
+    if (!_manager) {
+        _manager = [[AFHTTPSessionManager alloc] initWithBaseURL:WEBURLA];
+        _manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/javascript",@"text/html",@"text/plain",nil];
+        _manager.requestSerializer=[AFHTTPRequestSerializer serializer];
+        //
+        [_manager.requestSerializer setValue: [NSString stringWithFormat:@"%@", TOKEN] forHTTPHeaderField:@"token"];
+    }
+    return _manager;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self playerView];
@@ -41,41 +56,39 @@
         make.left.right.equalTo(0);
         make.height.equalTo(50);
     }];
+    [_bottomView.commentField.textSearchField addTarget:self action:@selector(textFinished:) forControlEvents:UIControlEventEditingDidEnd];
     _tableView = [[UITableView alloc] init];
-    _dicArr = [[NSMutableArray alloc] init];
-    [_dicArr addObject:@"1"];
+    _dicArr = [[NSMutableArray alloc] initWithCapacity:3];;
+    //[_dicArr addObject:@"1"];
     [self.view addSubview:_tableView];
     [_tableView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.baoKuanView.bottom).offset(17);
         make.left.right.equalTo(0);
-        //make.bottom.equalTo(-(SCREENHEIGHT - 47));
-        make.height.equalTo(210);
+        make.bottom.equalTo(self.bottomView.top).offset(0);
     }];
+   
     _tableView.delegate =self;
     _tableView.dataSource = self;
-    [_tableView registerClass:[CommentTableViewCell class] forCellReuseIdentifier:@"cellID"];
-//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-//    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+     typeof(self) weakSelf = self;
+    _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+         weakSelf.page = 1;
+        [weakSelf.dicArr removeAllObjects];
+        [weakSelf.tableView.mj_header beginRefreshing];
+        [weakSelf getAllComment];
+    }];
+    _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getAllComment)];
+    [self.tableView.mj_header beginRefreshing];
+    MJRefreshAutoStateFooter *footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(getAllComment)];
+    [self.tableView.mj_footer beginRefreshing];
+    [footer setTitle:@"暂时没有更多数据" forState:MJRefreshStateIdle];
+    [footer setTitle:@"暂时没有更多数据" forState:MJRefreshStatePulling];
+    [footer setTitle:@"服务器正在狂奔 ..." forState:MJRefreshStateRefreshing];
+    [self getAllComment];
+    _tableView.mj_footer = footer;
+    _tableView.tableFooterView = [UIView new];
+   [_tableView registerClass:[CommentTableViewCell class] forCellReuseIdentifier:@"cellID"];
 }
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    
-    [_dicArr addObject:@"2"];
-    [self.tableView reloadData];
 
-    [self scrollTableToFoot:YES];
-    
-}
-- (void)scrollTableToFoot:(BOOL)animated {
-    NSInteger s = [self.tableView numberOfSections];
-    if (s<1) return;
-    NSInteger r = [self.tableView numberOfRowsInSection:s-1];
-    if (r<1) return;
-    
-    NSIndexPath *ip = [NSIndexPath indexPathForRow:r-1 inSection:s-1];
-    
-    [self.tableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:animated];
-}
 #pragma tableViewDelegate
 #pragma mark  tableViewDelegate  datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -84,10 +97,12 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
     CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
     if (!cell) {
         cell = [[CommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
     }
+    cell.model = _dicArr[indexPath.row];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -159,8 +174,10 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.player.viewControllerDisappear = NO;
+     self.player.viewControllerDisappear = NO;
      self.navigationController.navigationBarHidden = YES;
+    self.page =1 ;
+    [self getAllComment];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -213,5 +230,95 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
+#pragma 获取所有评论
+-(void)getAllComment
+{
+    typeof(self) weakSelf =self;
+    NSDictionary *dic = @{
+                          @"videoId":_model.videoId,
+                           @"page":[NSString stringWithFormat:@"%ld",(long)self.page]
+                          };
+    [self.manager POST:@"userComment/getAllComment?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if ([responseObject[@"status"] boolValue] == true) {
+            NSMutableArray *newArr =(NSMutableArray *)[NSArray yy_modelArrayWithClass:[GetAllCommentModel class] json:responseObject[@"result"][@"comment"]];
+            if ([responseObject[@"status"] boolValue] == true) {
+                if (newArr.count == 0) {
+                    [weakSelf.tableView.mj_header endRefreshing];
+                    [weakSelf.tableView.mj_footer endRefreshing];
+                }
+                else
+                {
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        weakSelf.page = weakSelf.page +1;
+                        [weakSelf.dicArr addObjectsFromArray:newArr];
+                        NSLog(@"%@",responseObject[@"message"]);
+                        [weakSelf.tableView reloadData];
+                        
+                    });
+                }
+                
+            }
+        }
+       
+        [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf.tableView.mj_footer endRefreshing];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+         [weakSelf.tableView.mj_footer endRefreshing];
+    }];
+}
+#pragma action 评论
+-(void)textFinished:(UITextField*)textField
+{
+    if (textField.text.length ==0) {
+        textField.placeholder = @"输入不能为空";
+    }
+    else
+    {
+        if (textField.text.length >20) {
+            textField.text =nil;
+          textField.placeholder = @"输入不能超过二十个字";
+        }
+        else
+        {
+            textField.placeholder = @"写评论";
+            [self postCommentURL:textField];
+        }
+    }
+}
+-(void)postCommentURL:(UITextField *)textField
+{
+    NSDictionary *dicA = @{
+                           @"videoId":_model.videoId,
+                           @"authorId":_model.authorId,
+                           @"text":textField.text
+                           };
+    NSLog(@"%@",_model.videoId);
+    typeof(self) weakSelf = self;
+    [self.manager POST:@"userComment/addComment" parameters:dicA progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if ([responseObject[@"status"] boolValue] == true) {
+            NSLog(@"%@----",responseObject[@"message"]);
+            GetAllCommentModel *model = [[GetAllCommentModel alloc] init];
+            model.text = textField.text;
+            model.userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"nickName"];
+            model.createTime =@"刚刚";
+            model.headUrl = [NSURL URLWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"headerUrl"]];
+            [weakSelf.dicArr addObject:model];
+            NSLog(@"%@",responseObject[@"message"]);
+            [weakSelf.tableView reloadData];
+            [self scrollTableToFoot:YES];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+- (void)scrollTableToFoot:(BOOL)animated {
+    NSInteger s = [self.tableView numberOfSections];
+    if (s<1) return;
+    NSInteger r = [self.tableView numberOfRowsInSection:s-1];
+    if (r<1) return;
+    
+    NSIndexPath *ip = [NSIndexPath indexPathForRow:r-1 inSection:s-1];
+    
+    [self.tableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+}
 @end

@@ -258,6 +258,9 @@
             if ([responseObject[@"message"] isEqualToString:@"获取成功！"]) {
                 LoginModel *model = [LoginModel yy_modelWithDictionary:responseObject[@"result"]];
                  [weakSelf.mine setModel:model];
+               
+               
+                //NSLog(@"%@",model.opendId);
                  [[NSUserDefaults standardUserDefaults] setValue:model.opendId forKey:@"opendId"];
                 NSLog(@"%@",model.opendId);
                  [[NSUserDefaults standardUserDefaults] synchronize];

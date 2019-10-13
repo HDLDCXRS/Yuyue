@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "GetAllCommentModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CommentTableViewCell : UITableViewCell
@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) UILabel  *iconLabel;
 @property(nonatomic,strong) UILabel  *timeLabel;
 @property(nonatomic,strong) UILabel  *contentLabel;
+@property(nonatomic,strong) GetAllCommentModel  *model;
+-(void)setModel:(GetAllCommentModel * _Nonnull)model;
+
 @end
 
 NS_ASSUME_NONNULL_END

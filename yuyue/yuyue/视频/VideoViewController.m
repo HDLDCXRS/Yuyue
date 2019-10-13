@@ -131,8 +131,9 @@
     VideoCell *cell = [tableView dequeueReusableCellWithIdentifier:iden];
     if (!cell) {
         cell = [[VideoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:iden];
-        cell.bgcModel = _videoArr[indexPath.row];
+        
     }
+    cell.bgcModel = _videoArr[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }

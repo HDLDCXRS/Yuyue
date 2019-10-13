@@ -7,10 +7,7 @@
 //
 
 #import "CommentTableViewCell.h"
-//@property(nonatomic,strong) UIImageView  *iconImage;
-//@property(nonatomic,strong) UILabel  *iconLabel;
-//@property(nonatomic,strong) UILabel  *timeLabel;
-//@property(nonatomic,strong) UILabel  *contentLabel;
+
 @implementation CommentTableViewCell
 - (UIImageView *)iconImage
 {
@@ -91,5 +88,12 @@
         make.height.equalTo(11);
         make.left.equalTo(self.iconLabel.right).offset(0);
     }];
+}
+-(void)setModel:(GetAllCommentModel * _Nonnull)model
+{
+    [self.iconImage sd_setImageWithURL:model.headUrl];
+    self.iconLabel.text = model.userName;
+    self.contentLabel.text = model.text;
+    self.timeLabel.text  = model.createTime;
 }
 @end

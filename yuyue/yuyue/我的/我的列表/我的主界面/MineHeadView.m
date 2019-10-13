@@ -180,6 +180,7 @@
 
 -(void)setModel:(LoginModel*)model
 {
+    [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%@",model.headpUrl] forKey:@"headerUrl"];
     _artView.fansCount.text = model.likeTotal;
     _artView.clickCount.text = model.attentionTotal;
     _artView.commentCount.text = model.commentTotal;

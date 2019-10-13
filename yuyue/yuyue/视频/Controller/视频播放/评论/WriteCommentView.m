@@ -31,7 +31,18 @@
     if (!_wxBtn) {
         _wxBtn = [UIButton buttonWithNormalImage:@"分 享" highlightedImage:@"分 享" addTarget:self action:@selector(onClick:)];
     }
+    
     return _wxBtn;
+}
+- (CustomSearchView *)commentField
+{
+    if (!_commentField) {
+        _commentField = [[CustomSearchView alloc] init];
+        self.commentField.searchImage.image = [UIImage imageNamed:@"评论"];
+        self.commentField.textSearchField.placeholder = @"写评论";
+        
+    }
+    return _commentField;
 }
 - (instancetype)init
 {
@@ -46,6 +57,7 @@
     [self addSubview:self.wxBtn];
     [self addSubview:self.giftBtn];
     [self addSubview:self.likeBtn];
+    [self addSubview:self.commentField];
     [self updateConstraintsForView];
 }
 -(void)updateConstraintsForView
@@ -67,6 +79,15 @@
         make.bottom.equalTo(-25);
         make.right.equalTo(self.giftBtn.left).offset(-15);
         make.size.equalTo(CGSizeMake(size.width, size.height));
+    }];
+    self.commentField.layer.masksToBounds = YES;
+    self.commentField.layer.cornerRadius = 5;
+    self.commentField.backgroundColor = RGBA(239, 239, 239, 1);
+    [self.commentField makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(-(25-size.height/2));
+        make.right.equalTo(self.likeBtn.left).offset(-5);
+        make.height.equalTo(34);
+        make.left.equalTo(15);
     }];
 }
 @end

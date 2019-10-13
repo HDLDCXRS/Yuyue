@@ -46,7 +46,7 @@
 {
     CGSize size = self.searchImage.image.size;
     [self.searchImage makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(8);
+        make.centerY.equalTo(self.centerY);
         make.left.equalTo(13);
         make.size.equalTo(CGSizeMake(size.width, size.height));
     }];

@@ -109,6 +109,7 @@
 		0044F25223168C5100498D51 /* PromoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0044F25123168C5100498D51 /* PromoteViewController.m */; };
 		0044F2572316936B00498D51 /* CommonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0044F2562316936B00498D51 /* CommonView.m */; };
 		0044F25A2316956200498D51 /* PhomeNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0044F2592316956200498D51 /* PhomeNumberViewController.m */; };
+		005D1D212352F4F90018A8AF /* GetAllCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 005D1D202352F4F90018A8AF /* GetAllCommentModel.m */; };
 		005F4E342314DE8C00F4B002 /* BusinessLicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F4E2E2314DE8C00F4B002 /* BusinessLicenseViewController.m */; };
 		005F4E352314DE8C00F4B002 /* AdvertistingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F4E2F2314DE8C00F4B002 /* AdvertistingViewController.m */; };
 		005F4E362314DE8C00F4B002 /* UploadIdCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F4E312314DE8C00F4B002 /* UploadIdCardViewController.m */; };
@@ -352,6 +353,8 @@
 		0044F2562316936B00498D51 /* CommonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonView.m; sourceTree = "<group>"; };
 		0044F2582316956200498D51 /* PhomeNumberViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhomeNumberViewController.h; sourceTree = "<group>"; };
 		0044F2592316956200498D51 /* PhomeNumberViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhomeNumberViewController.m; sourceTree = "<group>"; };
+		005D1D1F2352F4F90018A8AF /* GetAllCommentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetAllCommentModel.h; sourceTree = "<group>"; };
+		005D1D202352F4F90018A8AF /* GetAllCommentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetAllCommentModel.m; sourceTree = "<group>"; };
 		005F4E2D2314DE8C00F4B002 /* BusinessLicenseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessLicenseViewController.h; sourceTree = "<group>"; };
 		005F4E2E2314DE8C00F4B002 /* BusinessLicenseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessLicenseViewController.m; sourceTree = "<group>"; };
 		005F4E2F2314DE8C00F4B002 /* AdvertistingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertistingViewController.m; sourceTree = "<group>"; };
@@ -740,8 +743,6 @@
 				002C70E723500BFA00767615 /* ZFCustomControlViewViewController.m */,
 				002C70EA2350448B00767615 /* BanKuanView.h */,
 				002C70EB2350448B00767615 /* BanKuanView.m */,
-				002C70F42350649E00767615 /* CommentTableViewCell.h */,
-				002C70F52350649E00767615 /* CommentTableViewCell.m */,
 			);
 			path = "视频播放";
 			sourceTree = "<group>";
@@ -762,6 +763,10 @@
 			children = (
 				002C70F82350803C00767615 /* WriteCommentView.h */,
 				002C70F92350803C00767615 /* WriteCommentView.m */,
+				005D1D1F2352F4F90018A8AF /* GetAllCommentModel.h */,
+				005D1D202352F4F90018A8AF /* GetAllCommentModel.m */,
+				002C70F42350649E00767615 /* CommentTableViewCell.h */,
+				002C70F52350649E00767615 /* CommentTableViewCell.m */,
 			);
 			path = "评论";
 			sourceTree = "<group>";
@@ -1511,6 +1516,7 @@
 				002C70EC2350448B00767615 /* BanKuanView.m in Sources */,
 				009A320B230F9B1700515B4B /* MineArtView.m in Sources */,
 				006AF1AE2339D1CF004DDBC5 /* MinePublishModel.m in Sources */,
+				005D1D212352F4F90018A8AF /* GetAllCommentModel.m in Sources */,
 				009A31F3230F9B1700515B4B /* MainLoginViewController.m in Sources */,
 				0024EFD52325F802001A6BC6 /* RealNameViewController.m in Sources */,
 				006AF1D4233B414E004DDBC5 /* MyWithDrawalView.m in Sources */,
